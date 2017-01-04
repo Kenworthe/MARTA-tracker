@@ -11,13 +11,11 @@ html
 
     div
       h3 Login Form
-      form(method='POST' action='/')
-        label(for='email') Email:
-        input(type='text', placeholder='Email' name='email')
-        label(for='username') Username:
-        input(type='text', placeholder='Username' name='username')
+      form(method='POST' action='/login')
+        label(for='emailOrUsername') Email or Username:
+        input(type='text', placeholder='Email or Username' name='emailOrUsername')
+        // label(for='username') Username:
+        // input(type='text', placeholder='Username' name='username')
         label(for='password') Password:
         input(type='text', placeholder='Password' name='password')
-        label(for='confirmPassword') Confirm Password:
-        input(type='text', placeholder='Confirm Password' name='confirmPassword')
-        button(type='submit') Sign up!
+        button(type='submit') Login!

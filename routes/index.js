@@ -28,4 +28,16 @@ router.post('/signup', function(req, res, next) {
   return signUpStrategy(req, res, next);
 });
 
+//POST login -> check passport
+router.post('/login', function(req, res, next){
+  console.log('attempting to login');
+  console.log(req.body);
+    var loginStrat = passport.authenticate('local-login', {
+        successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true
+    });
+    return loginStrat(req, res, next);
+});
+
 module.exports = router;
