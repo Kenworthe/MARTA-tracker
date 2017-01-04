@@ -11,7 +11,7 @@ function(req, email, password, next){
 	User.findOne({ $or: [
 		{ 'local.email': email },
 		{ 'username': req.body.username }
-	]}, 
+	]},
 	function(err, foundUser){
 		if (err){
 			return next(err);
@@ -33,7 +33,7 @@ function(req, email, password, next){
 			newUser.local.email = email;
 			newUser.local.password = newUser.encrypt(password);
 			newUser.username = req.body.username;
-      newUser.favorites = { };
+      // newUser.favorites = 'hello';
 
 			newUser.save(function(err){
 				return next(err, newUser);
