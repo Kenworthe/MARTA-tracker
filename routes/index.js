@@ -7,8 +7,16 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+router.get('/signup', function(req, res, next) {
+  res.render('signup');
+});
+
+router.get('/login', function(req, res, next) {
+  res.render('login');
+});
+
 /* POST SIGN UP */
-router.post('/', function(req, res, next) {
+router.post('/signup', function(req, res, next) {
   console.log('posting signup user:');
   console.log(req.body);
   var signUpStrategy = passport.authenticate('local-signup', {

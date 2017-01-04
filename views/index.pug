@@ -10,17 +10,12 @@ html
     p Hello from Van, Ramata, and Ken!
 
     div
-      h3 Signup Form
-      form(method='POST' action='/')
-        label(for='email') Email:
-        input(type='text', placeholder='Email' name='email')
-        label(for='username') Username:
-        input(type='text', placeholder='Username' name='username')
-        label(for='password') Password:
-        input(type='text', placeholder='Password' name='password')
-        label(for='confirmPassword') Confirm Password:
-        input(type='text', placeholder='Confirm Password' name='confirmPassword')
-        button(type='submit') Sign up!
+      a(href='/signup') Signup
+    div
+      a(href='/login') Login
+
+
+
 
 //- script angular
 //- script angular-ui-router

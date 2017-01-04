@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title MARTA Scheduler
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+  body
+    h1 MARTA Scheduler
+    p Welcome to our MARTA Scheduler App!!!
+    p Hello from Van, Ramata, and Ken!
+
+    div
+      h3 Login Form
+      form(method='POST' action='/')
+        label(for='email') Email:
+        input(type='text', placeholder='Email' name='email')
+        label(for='username') Username:
+        input(type='text', placeholder='Username' name='username')
+        label(for='password') Password:
+        input(type='text', placeholder='Password' name='password')
+        label(for='confirmPassword') Confirm Password:
+        input(type='text', placeholder='Confirm Password' name='confirmPassword')
+        button(type='submit') Sign up!
