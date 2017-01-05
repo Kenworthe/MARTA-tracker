@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var User = require('../models/user');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -13,6 +14,28 @@ router.get('/signup', function(req, res, next) {
 
 router.get('/login', function(req, res, next) {
   res.render('login');
+});
+
+//Van adding routes
+router.get('/users', function(req, res, next) {
+  User.find({})
+  .then(function(users){
+    res.json( {users: users});
+  })
+  .catch(function(err){
+    return next(err);
+  });
+});
+
+router.get('/users/:id', function(req, res,next) {
+  User.findById(req.params.id)
+  .then(function(user){
+    if (!user) return next(makeError(res, 'User not found', 404));
+    res.json({ user: user});
+  })
+  .catch(function(err) {
+    return next(err);
+  });
 });
 
 /* POST SIGN UP */

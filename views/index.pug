@@ -4,15 +4,17 @@ html
     title MARTA Scheduler
     link(rel='stylesheet', href='/stylesheets/style.css')
 
-  body
+  body(ng-app='martaApp')
     h1 MARTA Scheduler
     p Welcome to our MARTA Scheduler App!!!
     p Hello from Van, Ramata, and Ken!
+    section(ng-controller="userController")
 
     div
       a(href='/signup') Signup
     div
       a(href='/login') Login
+
 
     script(src='/angular/angular.min.js', type='text/javascript')
     script(src='/angular-ui-router/release/angular-ui-router.min.js', type='text/javascript')
@@ -20,7 +22,7 @@ html
     script(src='/javascripts/ng-services/user-service.js', type='text/javascript')
     script(src='/javascripts/ng-services/rail-service.js', type='text/javascript')
     script(src='/javascripts/ng-services/bus-service.js', type='text/javascript')
-    
+
 
 
 

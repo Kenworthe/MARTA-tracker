@@ -7,8 +7,17 @@
 // UPDATE username (with check for already taken)
 // UPDATE password (with confirm password and current password)
 // DELETE user (close account, with client side validation)
-const app = angular.module('martaApp', []);
+angular.module('martaApp')
 
-app.service('userService', function($http) {
+
+.service('userService', function($http) {
   console.log('userService is working!');
+  // this.getUsers = function() {
+  //   return $http.get('http://localhost/marta-scheduler/users/');
+  // };
+  // this.getUsers();
 })
+
+.controller('userController', function(userService){
+  console.log('hello from user contorlelr !');
+});
