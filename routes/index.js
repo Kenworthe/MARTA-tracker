@@ -38,6 +38,8 @@ router.get('/users/:id', function(req, res,next) {
   });
 });
 
+// end of Van adding routes
+
 /* POST SIGN UP */
 router.post('/signup', function(req, res, next) {
   console.log('posting signup user:');
