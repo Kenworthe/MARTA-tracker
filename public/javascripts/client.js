@@ -1,1 +1,1 @@
-//angular stuff here.
+angular.module('martaApp', []);

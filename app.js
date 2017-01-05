@@ -40,6 +40,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(session({ secret: 'test cookie',
 				  cookie: { maxAge: 30*24*60*60*1000 },
 				  resave: true,
