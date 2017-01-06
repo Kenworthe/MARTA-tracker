@@ -1,20 +1,37 @@
-angular.module('martaApp').service('busService', function($http){
-  console.log('busService is alive!')
-  var busService;
+angular.module('martaApp').service('busService', function($http) {
+    console.log('busService is alive!')
+    this.getAllBuses = function(){
+      $http({
+          method: 'GET',
+          url: 'http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus'
+        }).then(onBusIndexSuccess, onError);
+      }
 
-  $http({
-    method: 'GET',
-    url: 'http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus'
-  }).then(onBusShowSuccess, onError);
+      this.getOneBus = function(id){
+        $http({
+            method: 'GET',
+            url: "http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetBusByRoute/" +id ,
+              params: {id:id}
+          }).then(onBusControllerSuccess, onError);
+        }
 })
-.controller('busController', function(busService){
-  console.log('busController is alive!')
+  .controller('BusIndexController', function(busService){
+    console.log('BusIndexController is alive!');
+    busService.getAllBuses();
+    busService.getOneBus('191');
 })
 var vm = this;
-function onBusShowSuccess(response){
-  console.log('here\'s the data for bus', response.data)
-  vm.bus = response.data;
+
+function onBusIndexSuccess(response){
+    console.log('here\'s the data for all buses', response.data);
+    vm.bus = response.data.bus;
 }
-function onError(error){
-  console.log('there was an error: ', error)
+
+function onBusControllerSuccess(response){
+    console.log('here\'s the data for one bus', response.data);
+    vm.bus = response.data.bus;
+}
+
+function onError(error) {
+    console.log('there was an error: ', error);
 }
