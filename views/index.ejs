@@ -8,15 +8,25 @@
   </head>
   <body>
     <h1> MARTA Scheduler</h1>
-    <div>
-      <ui-view> loading...</ui-view>
-    </div>
+    <nav>
+      <h2>Navbar for testing</h2>
+      <ul>
+        <a ui-sref="home"><li>Home</li></a>
+        <a ui-sref="results"><li>Results</li></a>
+        <a ui-sref="favorites"><li>Favorites</li></a>
+        <a ui-sref="profile"><li>Profile</li></a>
+      </ul>
+    </nav>
 
     <div>
-      <a href='/signup'>Signup</a>
-    </div>
-    <div>
+      <h2>Signup and Login Buttons:</h2>
+      <a href='/signup'>Signup</a> 
       <a href='/login'>Login</a>
+    </div>
+
+    <h2>Angular states (templateUrl):</h2>
+    <div>
+      <ui-view> loading...</ui-view>
     </div>
 
     <script src='angular/angular.min.js' type='text/javascript'></script>
