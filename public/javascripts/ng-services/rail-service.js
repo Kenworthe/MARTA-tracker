@@ -1,1 +1,1 @@
-angular.module('martaApp').service()
+angular.module('martaApp').service();
