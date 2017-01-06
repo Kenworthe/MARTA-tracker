@@ -7,7 +7,7 @@ angular.module('martaApp').service('busService', function($http) {
         }).then(onBusIndexSuccess, onError);
       }
 
-      this.getOneBus = function(id){
+    this.getOneBus = function(id){
         $http({
             method: 'GET',
             url: "http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetBusByRoute/" +id ,
@@ -15,10 +15,10 @@ angular.module('martaApp').service('busService', function($http) {
           }).then(onBusControllerSuccess, onError);
         }
 })
-  .controller('BusIndexController', function(busService){
-    console.log('BusIndexController is alive!');
-    busService.getAllBuses();
-    busService.getOneBus('191');
+    .controller('BusIndexController', function(busService){
+      console.log('BusIndexController is alive!');
+      busService.getAllBuses();
+      busService.getOneBus('191');
 })
 var vm = this;
 
