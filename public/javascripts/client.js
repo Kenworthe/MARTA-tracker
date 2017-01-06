@@ -35,17 +35,28 @@ angular.module('martaApp', ['ui.router'])
 })
 .controller('homeController', function() {
   console.log('homeController is alive!');
-  this.title= 'Homepage';
+  this.title = 'Homepage';
 })
-.controller('resultsController', function() {
+.controller('resultsController', function(railService, $filter) {
   console.log('resultsController is alive!');
-  this.title= 'results page';
+  this.title = 'results page';
+  this.selectedStation = '';
+  this.trains = [];
+  this.station = [];
+
+		railService.getAllTrains()
+		.then( (response) => {
+			this.trains = response.data;
+			// this.station = $filter('filter')(response.data, { 'STATION': station })
+			console.log(this.trains);
+			// console.log(this.station);
+		});
 })
 .controller('favoritesController', function() {
   console.log('favoritesController is alive!');
-  this.title= 'favorites page';
+  this.title = 'favorites page';
 })
 .controller('profileController', function() {
   console.log('profileController is alive!');
-  this.title= 'profile page';
+  this.title = 'profile page';
 })
