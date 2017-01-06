@@ -54,14 +54,19 @@ router.post('/signup', function(req, res, next) {
 });
 
 //POST login -> check passport
-router.post('/login', function(req, res, next){
-  console.log('attempting to login');
-  console.log(req.body);
+router.post('/login',
+  passport.authenticate('local-login'),
+  function(req, res, next){
+    console.log('req.user.id is ' + req.user.id);
+    res.redirect('/users/' + req.user.id);
+    console.log('attempting to login');
+    console.log(req.body);
     var loginStrat = passport.authenticate('local-login', {
-        successRedirect: '/',
+        // successRedirect: '/' + req.user._id,
         failureRedirect: '/login',
         failureFlash: true
     });
+    // res.redirect('/users' + req.user.id);
     return loginStrat(req, res, next);
 });
 
