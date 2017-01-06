@@ -3,32 +3,34 @@ angular.module('martaApp', ['ui.router'])
   $stateProvider
   .state('home', {
     url: '/',
-    templateUrl: 'ng-templates/index.html',
+    templateUrl: '/javascripts/ng-templates/index.html',
+    // template: '<h1> hello this is supposed to be index.html!</h1>',
     controller: 'homeController',
     controllerAs: '$ctrl'
   })
   .state('results', {
     url: '/results',
-    templateUrl: '/ng-templates/results.html',
+    templateUrl: '/javascripts/ng-templates/results.html',
+    // template: '<h1> hello this is supposed to be results.html!</h1>',
     controller: 'resultsController',
     controllerAs: '$ctrl'
   })
   .state('favorites', {
     url: '/favorites',
-    templateUrl: '/ng-templates/favorites.html',
+    templateUrl: '/javascripts/ng-templates/favorites.html',
     controller: 'favoritesController',
     controllerAs: '$ctrl'
   })
   .state('profile', {
     url: '/profile',
-    templateUrl: '/ng-templates/profile.html',
+    templateUrl: '/javascripts/ng-templates/profile.html',
     controller: 'profileController',
     controllerAs: '$ctrl'
   });
   $urlRouterProvider
   .otherwise('/');
-  $locationProvider
-  .html5Mode({ enabled: true, requireBase: false });
+  // $locationProvider
+  // .html5Mode({ enabled: true, requireBase: false });
 
 })
 .controller('homeController', function() {

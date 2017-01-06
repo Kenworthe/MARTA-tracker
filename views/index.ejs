@@ -1,29 +1,39 @@
 <!DOCTYPE html>
-<html ng-app='martaApp'>
+<html ng-app="martaApp">
   <head>
     <meta charset="utf-8">
     <title>MARTA Scheduler</title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
 
   </head>
   <body>
     <h1> MARTA Scheduler</h1>
+    <nav>
+      <h2>Navbar for testing:</h2>
+      <ul>
+        <li><a ui-sref="home">Home</a></li>
+        <li><a ui-sref="results">Results</a></li>
+        <li><a ui-sref="favorites">Favorites</a></li>
+        <li><a ui-sref="profile">Profile</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <h2>Signup and Login Buttons:</h2>
+      <a href="/signup">Signup</a> 
+      <a href="/login">Login</a>
+    </div>
+
+    <h2>Angular states (templateUrl):</h2>
     <div>
       <ui-view> loading...</ui-view>
     </div>
 
-    <div>
-      <a href='/signup'>Signup</a>
-    </div>
-    <div>
-      <a href='/login'>Login</a>
-    </div>
-
-    <script src='angular/angular.min.js' type='text/javascript'></script>
-    <script src='angular-ui-router/release/angular-ui-router.min.js' type='text/javascript'></script>
-    <script src='javascripts/client.js' type='text/javascript'></script>
-    <script src='javascripts/ng-services/user-service.js' type='text/javascript'></script>
-    <script src='javascripts/ng-services/rail-service.js' type='text/javascript'></script>
-    <script src='javascripts/ng-services/bus-service.js' type='text/javascript'></script>
+    <script src="angular/angular.min.js" type="text/javascript"></script>
+    <script src="angular-ui-router/release/angular-ui-router.min.js" type="text/javascript"></script>
+    <script src="javascripts/client.js" type="text/javascript"></script>
+    <script src="javascripts/ng-services/user-service.js" type="text/javascript"></script>
+    <script src="javascripts/ng-services/rail-service.js" type="text/javascript"></script>
+    <script src="javascripts/ng-services/bus-service.js" type="text/javascript"></script>
   </body>
 </html>
