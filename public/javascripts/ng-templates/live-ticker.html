@@ -1,0 +1,14 @@
+<p>hello from live ticker component!</p>
+
+<hr>
+<h3>Selected station only:</h3>
+<ul>
+	<li ng-repeat="train in $ctrl.station">{{train.STATION}} - {{train.WAITING_TIME}}</li>
+</ul>
+
+<hr>
+<h3>All train stations:</h3>
+<ul>
+	<li ng-repeat="train in $ctrl.trains">{{train.STATION}} - {{train.WAITING_TIME}}</li>
+</ul>
+<hr>

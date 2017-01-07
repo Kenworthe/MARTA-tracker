@@ -37,20 +37,9 @@ angular.module('martaApp', ['ui.router'])
   console.log('homeController is alive!');
   this.title = 'Homepage';
 })
-.controller('resultsController', function(railService, $filter) {
+.controller('resultsController', function(railService, busService, $filter) {
   console.log('resultsController is alive!');
   this.title = 'results page';
-  this.selectedStation = '';
-  this.trains = [];
-  this.station = [];
-
-		railService.getAllTrains()
-		.then( (response) => {
-			this.trains = response.data;
-			// this.station = $filter('filter')(response.data, { 'STATION': station })
-			console.log(this.trains);
-			// console.log(this.station);
-		});
 })
 .controller('favoritesController', function() {
   console.log('favoritesController is alive!');
