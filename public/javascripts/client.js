@@ -4,14 +4,12 @@ angular.module('martaApp', ['ui.router'])
   .state('home', {
     url: '/',
     templateUrl: '/javascripts/ng-templates/index.html',
-    // template: '<h1> hello this is supposed to be index.html!</h1>',
     controller: 'homeController',
     controllerAs: '$ctrl'
   })
   .state('results', {
     url: '/results',
     templateUrl: '/javascripts/ng-templates/results.html',
-    // template: '<h1> hello this is supposed to be results.html!</h1>',
     controller: 'resultsController',
     controllerAs: '$ctrl'
   })
@@ -35,17 +33,17 @@ angular.module('martaApp', ['ui.router'])
 })
 .controller('homeController', function() {
   console.log('homeController is alive!');
-  this.title= 'Homepage';
+  this.title = 'Homepage';
 })
 .controller('resultsController', function() {
   console.log('resultsController is alive!');
-  this.title= 'results page';
+  this.title = 'results page';
 })
 .controller('favoritesController', function() {
   console.log('favoritesController is alive!');
-  this.title= 'favorites page';
+  this.title = 'favorites page';
 })
 .controller('profileController', function() {
   console.log('profileController is alive!');
-  this.title= 'profile page';
+  this.title = 'profile page';
 })
