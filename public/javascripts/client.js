@@ -4,14 +4,12 @@ angular.module('martaApp', ['ui.router'])
   .state('home', {
     url: '/',
     templateUrl: '/javascripts/ng-templates/index.html',
-    // template: '<h1> hello this is supposed to be index.html!</h1>',
     controller: 'homeController',
     controllerAs: '$ctrl'
   })
   .state('results', {
     url: '/results',
     templateUrl: '/javascripts/ng-templates/results.html',
-    // template: '<h1> hello this is supposed to be results.html!</h1>',
     controller: 'resultsController',
     controllerAs: '$ctrl'
   })
@@ -37,7 +35,7 @@ angular.module('martaApp', ['ui.router'])
   console.log('homeController is alive!');
   this.title = 'Homepage';
 })
-.controller('resultsController', function(railService, busService, $filter) {
+.controller('resultsController', function() {
   console.log('resultsController is alive!');
   this.title = 'results page';
 })
