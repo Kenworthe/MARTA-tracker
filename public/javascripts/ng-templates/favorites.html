@@ -1,5 +1,15 @@
-<p>{{ $ctrl.title }} content goes here</p>
-<form>
-  <h1>edit</h1>
+<!-- <p>{{ $ctrl.title }} content goes here</p> -->
+<!-- <div ng-repeat="user in $ctrl.users">
+  <p>username:{{user.username}}</p>
+  <p>favorites:{{user.favorites}}</p>
+</div> -->
+<!--
+<p>This users favorites are {{$ctrl.favorites}}</p> -->
+<p>username: {{$ctrl.user.user.username}}</p>
+  <button ng-click="$ctrl.getUser()">get user</button>
+  <input ng-model="$ctrl.user.user.username"/>
+  <input ng-model="$ctrl.user.user.local.email"/>
+  <input ng-model="$ctrl.user.user.favorites"/>
 
-</form>
+  <button ng-click="$ctrl.postUser()">post user</button>
+  <!-- <input/> -->

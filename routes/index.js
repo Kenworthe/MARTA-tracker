@@ -38,6 +38,74 @@ router.get('/users/:id', function(req, res,next) {
   });
 });
 
+router.post('/users/:id/favorites', function(req, res,next) {
+  User.findById(req.params.id)
+  .then(function(user){
+    if (!user) return next(makeError(res, 'User not found', 404));
+    User.favorites = 'this';
+    res.json({ favorites: user.username});
+  })
+  .catch(function(err) {
+    return next(err);
+  });
+});
+
+
+
+// router.put('/users/:id/', function(req, res,next) {
+//   User.findById(req.params.id, function(err, user){
+//     if(err){
+//       res.status(500).send(err);
+//     } else{
+//       // user.favorites.$push:'first';
+//       user.favorites = $push.favorites('5 Points');
+//       user.save(function(err, user){
+//         if (err){
+//           res.status(500).send(err);
+//         } else {
+//           res.send(user);
+//         }
+//       });
+//     }
+//   });
+
+  router.put('/users/:id', function(req, res, next){
+    User.findOneAndUpdate(
+      {_id: '587024073be0ce0b8d177128'},
+      { $addToSet: {favorites: '5 Points', '10 Points' } },
+      // {safe: true, upsert: true, new:true},
+      function(err, user){
+        if(err){
+          console.log(err);
+        } else {
+          console.log('user:', user);
+        }
+      }
+  );
+});
+
+router.delete('/users/587024073be0ce0b8d177128', function(req, res,next) {
+  // .delete( function (req, res) {     // <===== defined inside 'put',
+  User.findOneAndRemove( {id: req.params.id}, function (err,res){
+    res.json( {
+      message: 'got rid of this user',
+      user: result
+    });
+  })
+  // res.send('got a delete request');
+  //     User.remove({
+  //         _id: req.params.user_id
+  //     }, function (err, user) {
+  //         if (err) return res.send(err);
+  //         res.json({ message: 'Deleted' });
+  //     });
+  });
+  // .catch(function(err) {
+  //   return next(err);
+  // });
+// });
+
+
 // end of Van adding routes
 
 /* POST SIGN UP */
@@ -58,7 +126,8 @@ router.post('/login',
   passport.authenticate('local-login'),
   function(req, res, next){
     console.log('req.user.id is ' + req.user.id);
-    res.redirect('/users/' + req.user.id);
+    // res.redirect('/users/' + req.user.id);
+    res.redirect('/');
     console.log('attempting to login');
     console.log(req.body);
     var loginStrat = passport.authenticate('local-login', {

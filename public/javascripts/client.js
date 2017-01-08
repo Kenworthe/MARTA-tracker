@@ -1,4 +1,4 @@
-angular.module('martaApp', ['ui.router'])
+angular.module('martaApp', ['ui.router', 'ngResource'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider){
   $stateProvider
   .state('home', {
@@ -18,7 +18,7 @@ angular.module('martaApp', ['ui.router'])
   .state('favorites', {
     url: '/favorites',
     templateUrl: '/javascripts/ng-templates/favorites.html',
-    controller: 'favoritesController',
+    controller: 'getUsersController',
     controllerAs: '$ctrl'
   })
   .state('profile', {

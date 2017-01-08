@@ -1,22 +1,19 @@
-(need to convert login.pug to login.ejs)
-<!--doctype html
-html
-  head
-    title MARTA Scheduler
-    link(rel='stylesheet', href='/stylesheets/style.css')
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MARTA Scheduler</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
 
-  body
-    h1 MARTA Scheduler
-    p Welcome to our MARTA Scheduler App!!!
-    p Hello from Van, Ramata, and Ken!
-
-    div
-      h3 Login Form
-      form(method='POST' action='/login')
-        label(for='emailOrUsername') Email or Username:
-        input(type='text', placeholder='Email or Username' name='emailOrUsername')
-        // label(for='username') Username:
-        // input(type='text', placeholder='Username' name='username')
-        label(for='password') Password:
-        input(type='text', placeholder='Password' name='password')
-        button(type='submit') Login!-->
+  </head>
+  <body>
+    <h1>MARTA Scheduler</h1>
+    <h3>Login Form</h3>
+      <form method='POST' action='/login'/>
+        <label for='emailOrUsername'>Email or Username:</label>
+        <input type='text' placeholder='Email or Username' name='emailOrUsername'><br>
+        <label for='password'>Password:</label>
+        <input type='text' placeholder='Password' name='password'><br>
+        <button type='submit'>Login</button>
+ </body>
+</html>

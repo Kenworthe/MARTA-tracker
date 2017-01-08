@@ -8,7 +8,9 @@ var UserSchema = new mongoose.Schema({
 		password: 	{ type: String, required: true }
 	},
 	username: 		{ type: String, required: true },
-	favorites: 		[{ type: mongoose.Schema.Types.ObjectId, ref: 'Favorite' }]
+	// favorites: 		[{ type: mongoose.Schema.Types.ObjectId, ref: 'Favorite' }]
+	favorites: 		0,
+
 	},
 	{ timestamps: true }
 );
@@ -19,6 +21,13 @@ UserSchema.methods.encrypt = function(password){
 
 UserSchema.methods.isValidPassword = function(password){
 	return bcrypt.compareSync(password, this.local.password);
+};
+
+//add method to edit favorite
+UserSchema.methods.addFavorite = function(cb){
+	console.log('add favorites hello');
+	this.favorites = ['22'];
+	this.save(cb);
 };
 
 module.exports = mongoose.model('User', UserSchema);
