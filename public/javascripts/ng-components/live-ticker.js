@@ -42,4 +42,9 @@ function liveTickerController(railService, $filter, $timeout){
 		self.repeat = false;
 		console.log('Repeat set to false!');
 	}, (2*60*1000));
+
+//stop timeout if user changes URL
+	// $rootScope.$on('$locationChangeStart', function(){
+	// 	self.repeat = false;
+	// })
 }
