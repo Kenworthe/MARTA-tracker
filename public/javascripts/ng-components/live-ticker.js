@@ -13,24 +13,26 @@ function liveTickerController(railService, $filter, $timeout){
 	self.buses = [];
 	self.repeat = true;
 
-	self.getAllTrainsRepeat = function(){
-		railService.getAllTrains()
-		.then( (response) => {
-			self.trains = response.data;
-			if (self.repeat){
-				$timeout(self.getAllTrainsRepeat, 3000);
-			}
-			else { return }
-		});
-	}
-	self.getAllTrainsRepeat();
+	// self.getAllTrainsRepeat = function(){
+	// 	railService.getAllTrains()
+	// 	.then( (response) => {
+	// 		self.trains = response.data;
+	// 		if (self.repeat){
+	// 			$timeout(self.getAllTrainsRepeat, 3000);
+	// 		}
+	// 		else { return }
+	// 	});
+	// }
+	// self.getAllTrainsRepeat();
 
 	self.getStationRepeat = function(stationName){
+		console.log(stationName);
 		railService.getAllTrains()
 		.then( (response) => {
 			self.station = $filter('filter')(response.data, { 'STATION': stationName });
+			console.log(self.station);
 			if (self.repeat){
-				$timeout(() => { self.getStationRepeat(stationName) }, 3000);
+				$timeout(() => { self.getStationRepeat(self.selectedStation) }, 3000);
 			}
 			else { return }
 		});
