@@ -7,26 +7,39 @@ angular.module('martaApp')
 function liveTickerController(railService, $filter, $timeout){
 	console.log('liveTickerController is alive!');
 	let self = this;
-	self.selectedStation = 'MIDTOWN STATION';
+	self.selectedStation = 'FIVE POINTS STATION';
 	self.trains = [];
-	self.buses = [];
 	self.station = [];
+	self.buses = [];
+	self.repeat = true;
 
 	self.getAllTrainsRepeat = function(){
 		railService.getAllTrains()
 		.then( (response) => {
 			self.trains = response.data;
-			console.log(self.trains);
-			$timeout(self.getAllTrainsRepeat, 2000);
+			if (self.repeat){
+				$timeout(self.getAllTrainsRepeat, 3000);
+			}
+			else { return }
 		});
 	}
 	self.getAllTrainsRepeat();
 
-// 	railService.getAllTrains()
-// 	.then( (response) => {
-// 		this.trains = response.data;
-// 		this.station = $filter('filter')(response.data, { 'STATION': this.selectedStation });
-// 		console.log(this.trains);
-// 		console.log(this.station);
-// 	})
+	self.getStationRepeat = function(stationName){
+		railService.getAllTrains()
+		.then( (response) => {
+			self.station = $filter('filter')(response.data, { 'STATION': stationName });
+			if (self.repeat){
+				$timeout(() => { self.getStationRepeat(stationName) }, 3000);
+			}
+			else { return }
+		});
+	}
+	self.getStationRepeat(self.selectedStation);
+
+//timeout function to stop refresh after a set duration.
+	$timeout(function(){
+		self.repeat = false;
+		console.log('Repeat set to false!');
+	}, (2*60*1000));
 }
