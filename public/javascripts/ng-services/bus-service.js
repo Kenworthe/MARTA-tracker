@@ -1,11 +1,13 @@
-angular.module('martaApp').service('busService', function($http) {
+angular.module('martaApp')
+  .service('busService', function($http, $filter) {
     console.log('busService is alive!')
     this.getAllBuses = function(){
       $http({
           method: 'GET',
           url: 'http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus'
         }).then(onBusIndexSuccess, onError);
-      }
+
+
 
     this.getOneBus = function(id){
         $http({
@@ -14,11 +16,28 @@ angular.module('martaApp').service('busService', function($http) {
               params: {id:id}
           }).then(onBusControllerSuccess, onError);
         }
+      }
 })
-    .controller('BusIndexController', function(busService){
-      console.log('BusIndexController is alive!');
-      busService.getAllBuses();
-      busService.getOneBus('191');
+    .controller('busController', function(busService, $filter){
+       console.log('busController is alive!');
+      this.userSelected = null;
+  		this.buses = [];
+  		this.timepoint = [];
+
+      busService.getAllBuses()
+       .then( (response) => {
+        this.buses = response.data;
+        this.timepoint = $filter('filter')(response.data, { 'TIMEPOINT': timepoint})
+        console.log(this.buses);
+        console.log(this.timepoint);
+
+      })
+
+      busService.getOneBus('Dunwoody station')
+       .then( (response) => {
+         this.timepoint = response.data;
+         console.log(this.timepoint)
+       })
 })
 var vm = this;
 
