@@ -145,7 +145,7 @@ router.post('/login',
   function(req, res, next){
     console.log('req.user is ' + req.user);
     global.currentUser = req.user;
-    req.session.user = user;
+    // req.session.user = user;
     console.log('global user is '+ currentUser);
     // res.redirect('/users/' + req.user.id);
     // res.redirect('/')
