@@ -1,11 +1,16 @@
 <p>Hello I am the search bar!</p>
+<p>Search Bus Here!</p>
 <input type="text" placeholder="Train Station Search" ng-model="trainFilter">
 
-<p>Search Bus Here!</p>
-<input type="text" placeholder="Bus Search" ng-model="busFilter">
+{{$ctrl.trains | filter:trainFilter}}
+<hr>
+<p>Search Train Here!</p>
+<input type="text" placeholder="Bus Timepoint Search" ng-model="busFilter">
+{{$ctrl.buses | filter:busFilter}}
+<!-- <input type="text" placeholder="Bus Search" ng-model="busFilter">
 
 [<span ng-repeat="train in $ctrl.trains |filter: trainFilter | orderBy:'STATION' as sortedPlaces" data-ng-if="sortedPlaces[$index-1].STATION!=train.STATION" value="{{train.STATION}}">{{train.STATION}},</span>]
 
 <hr>
 
-[<span ng-repeat="bus in $ctrl.buses |filter: busFilter | orderBy:'TIMEPOINT' as sortedStations" data-ng-if="sortedStations[$index-1].TIMEPOINT !=bus.TIMEPOINT" value="{{bus.TIMEPOINT}}">{{bus.TIMEPOINT}},</span>]
+[<span ng-repeat="bus in $ctrl.buses |filter: busFilter | orderBy:'TIMEPOINT' as sortedStations" data-ng-if="sortedStations[$index-1].TIMEPOINT !=bus.TIMEPOINT" value="{{bus.TIMEPOINT}}">{{bus.TIMEPOINT}},</span>] -->
