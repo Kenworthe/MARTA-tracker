@@ -1,1 +1,13 @@
-<p>{{ $ctrl.title }} content goes here</p>
+
+<p>username: {{$ctrl.user.user.username}}</p>
+  <button ng-click="$ctrl.getUser()">get user</button>
+  <ul>
+    <li ng-repeat="favorite in $ctrl.user.user.favorites">{{favorite}}</li>
+  </ul>
+  <input placeholder="username" ng-model="$ctrl.user.user.username"/>
+  <input placeholder="email" ng-model="$ctrl.user.user.local.email"/>
+  <input type="text" placeholder="add favorites" ng-model="$ctrl.favorites"/>
+  <input type="text" placeholder="remove favorites" ng-model="$ctrl.removeFavorite"/>
+  <button ng-click="$ctrl.removeThisFavorite()">removeFavorite</button>
+  <button ng-click="$ctrl.postUser()">post user</button>
+  <!-- <input/> -->
