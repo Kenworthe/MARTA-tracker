@@ -17,7 +17,7 @@
 <label>Search: <input ng-model="searchTimepoint"></label>
 <table id="searchTimepointResults">
   <!-- <tr><th>Bus TIMEPOINT</th></tr> -->
-  <tr ng-repeat="bus in buses | filter:searchTimepoint">
+  <tr ng-repeat="bus in buses | filter:searchTIMEPOINT">
     <td>{{bus.TIMEPOINT}}</td>
   </tr>
 </table>

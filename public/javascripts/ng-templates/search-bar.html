@@ -1,5 +1,8 @@
 <p>Hello I am the search bar!</p>
 <input>
 
-<p ng-repeat="train in $ctrl.trains">{{train}}</p>
-<p>{{$ctrl.buses}}</p>
+<p ng-repeat="train in $ctrl.trains | orderBy:'STATION' as sortedPlaces" data-ng-if="sortedPlaces[$index-1].STATION!=train.STATION" value="{{train.STATION}}">{{train.STATION}}</p>
+
+
+
+<p ng-repeat="bus in $ctrl.buses | orderBy:'TIMEPOINT' as sortedStations" data-ng-if="sortedStations[$index-1].TIMEPOINT !=bus.TIMEPOINT" value="{{bus.TIMEPOINT}}">{{bus.TIMEPOINT}}</p>
