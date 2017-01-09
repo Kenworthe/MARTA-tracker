@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <head>
   <script src="angular/angular.min.js" type="text/javascript"></script>
-<<<<<<< Updated upstream
-  <script src="bus-service.js"></script>
-</head>
-  <body ng-app="martaApp" ng-controller="busController">
-=======
-  <script src="search-bar.js"></script>
+  <script src="public/javascripts/ng-services/bus-service.js"></script>
 </head>
   <body ng-app="martaApp">
->>>>>>> Stashed changes
   <p>{{ $ctrl.title }} content goes here</p>
-<div ng-init="buses = busService.getAllBuses()"</div>
-<div ng-init="trains= railService.getAllTrains()"</div>
+<!-- <div ng-init="buses = busService.getAllBuses()"</div>
+<div ng-init="trains= railService.getAllTrains()"</div> -->
 
+<div>
+  <search-bar></search-bar>
+</div>
+
+<hr>
+<p>ignore below for now:</p>
 <label>Search: <input ng-model="searchTimepoint"></label>
 <table id="searchTimepointResults">
   <!-- <tr><th>Bus TIMEPOINT</th></tr> -->
@@ -23,7 +23,7 @@
 </table>
 <label>Any: <input ng-model="search.$"></label> <br>
 <label>TIMEPOINT only <input ng-model="search.TIMEPOINT"></label><br>
-<label>Equality <input type="checkbox" ng-model="strict"></label><br>
+<!-- <label>Equality <input type="checkbox" ng-model="strict"></label><br> -->
 <table id="searchTimepointResults">
   <!-- <tr ng-repeat="busObj.in buses | filter:search:strict"> -->
   <tr ng-filter: 'Timepoint' | 'TIMEPOINT': timepoint>
@@ -40,7 +40,7 @@
 </table>
 <label>Any: <input ng-model="search.$"></label> <br>
 <label>STATION only <input ng-model="search.STATION"></label><br>
-<label>Equality <input type="checkbox" ng-model="strict"></label><br>
+<!-- <label>Equality <input type="checkbox" ng-model="strict"></label><br> -->
 <table id="searchStationResults">
     <!-- <tr ng-repeat="trainObj.in trains | filter:search:strict"> -->
     <tr ng-filter='Station' | 'STATION' : station>
