@@ -15,6 +15,10 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
+router.get('/marta', function(req, res, next){
+  res.json('http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=e894d4a6-72ca-4268-94ec-af98560a3cc8')
+});
+
 /* POST SIGN UP */
 router.post('/signup', function(req, res, next) {
   console.log('posting signup user:');
