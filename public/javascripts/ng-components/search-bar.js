@@ -10,6 +10,7 @@ function searchBarController(busService, railService, $filter) {
     let self = this;
     self.trains = [];
     self.buses = [];
+    
 
 
     busService.getAllBuses()
