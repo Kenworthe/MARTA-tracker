@@ -71,14 +71,14 @@ router.post('/users/:id/favorites', function(req, res,next) {
 
   router.put('/users/:id', function(req, res, next){
     User.findOneAndUpdate(
-      {_id: '587024073be0ce0b8d177128'},
-      { $addToSet: {favorites: '5 Points', '10 Points' } },
-      // {safe: true, upsert: true, new:true},
+      {_id: currentUser.id},
+      { $addToSet: {favorites: req.body.favorites }},
+      {safe: true, upsert: true, new:true},
       function(err, user){
         if(err){
           console.log(err);
         } else {
-          console.log('user:', user);
+          console.log(user);
         }
       }
   );
@@ -92,18 +92,8 @@ router.delete('/users/587024073be0ce0b8d177128', function(req, res,next) {
       user: result
     });
   })
-  // res.send('got a delete request');
-  //     User.remove({
-  //         _id: req.params.user_id
-  //     }, function (err, user) {
-  //         if (err) return res.send(err);
-  //         res.json({ message: 'Deleted' });
-  //     });
+
   });
-  // .catch(function(err) {
-  //   return next(err);
-  // });
-// });
 
 
 // end of Van adding routes
@@ -125,7 +115,8 @@ router.post('/signup', function(req, res, next) {
 router.post('/login',
   passport.authenticate('local-login'),
   function(req, res, next){
-    console.log('req.user.id is ' + req.user.id);
+    console.log('req.user.id is ' + req.user);
+    global.currentUser = req.user;
     // res.redirect('/users/' + req.user.id);
     res.redirect('/');
     console.log('attempting to login');

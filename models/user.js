@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
 	},
 	username: 		{ type: String, required: true },
 	// favorites: 		[{ type: mongoose.Schema.Types.ObjectId, ref: 'Favorite' }]
-	favorites: 		0,
+	favorites: 		[],
 
 	},
 	{ timestamps: true }
