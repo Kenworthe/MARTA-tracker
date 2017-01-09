@@ -6,9 +6,16 @@
 	<input ng-model="$ctrl.selectedStation" name="$ctrl.selectedStation">
 	<p>Showing stations for: {{$ctrl.selectedStation}}</p>
 </div>
-
 <ul>
 	<li ng-repeat="train in $ctrl.station">{{train.STATION}} : {{train.WAITING_SECONDS}} - {{train.WAITING_TIME}}</li>
+</ul>
+
+<div>
+	<input ng-model="$ctrl.selectedBusStop" name="$ctrl.selectedBusStop">
+	<p>Showing Bus Stop for: {{$ctrl.selectedBusStop}}</p>
+</div>
+<ul>
+	<li ng-repeat="bus in $ctrl.busStop">{{bus.TIMEPOINT}} : {{bus.LATITUDE}}, {{bus.LONGITUDE}}</li>
 </ul>
 <!--
 <hr>

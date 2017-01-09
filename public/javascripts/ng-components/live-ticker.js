@@ -4,13 +4,15 @@ angular.module('martaApp')
 	controller: liveTickerController,
 	controllerAs: '$ctrl'
 })
-function liveTickerController(railService, $filter, $timeout){
+function liveTickerController(railService, busService, $filter, $timeout){
 	console.log('liveTickerController is alive!');
 	let self = this;
 	self.selectedStation = 'FIVE POINTS STATION';
+	self.selectedBusStop = 'BROOKHAVEN';
 	self.trains = [];
 	self.station = [];
 	self.buses = [];
+	self.busStop = [];
 	self.repeat = true;
 
 	// self.getAllTrainsRepeat = function(){
@@ -38,6 +40,20 @@ function liveTickerController(railService, $filter, $timeout){
 		});
 	}
 	self.getStationRepeat(self.selectedStation);
+
+	self.getBusStopRepeat = function(stopName){
+		console.log(stopName);
+		busService.getAllBuses()
+		.then( (response) => {
+			self.busStop = $filter('filter')(response.data, { 'TIMEPOINT': stopName });
+			console.log(self.busStop);
+			if (self.repeat){
+				$timeout(() => { self.getBusStopRepeat(self.selectedBusStop) }, 3000);
+			}
+			else { return }
+		});
+	}
+	self.getBusStopRepeat(self.selectedBusStop);
 
 //timeout function to stop refresh after a set duration.
 	$timeout(function(){
