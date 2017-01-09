@@ -5,7 +5,8 @@ angular.module('martaApp')
     this.getAllBuses = function(){
       return $http({
           method: 'GET',
-          url: 'http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus'
+          // url: 'http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus'
+          url: '/marta-bus'
       })
       // .then(function(buses){
       //   // console.log('buses are ', buses);

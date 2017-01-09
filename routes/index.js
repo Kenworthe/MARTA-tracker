@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var request = require('request');
 var User = require('../models/user');
 
+var martaRail = 'http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=e894d4a6-72ca-4268-94ec-af98560a3cc8';
+var martaBus = 'http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus';
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log('signed in as:'+ currentUser);
@@ -17,8 +20,26 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
-router.get('/marta', function(req, res, next){
-  res.json('http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=e894d4a6-72ca-4268-94ec-af98560a3cc8')
+router.get('/marta-rail', function(req, res, next){
+  request(martaRail, function(error, response, body){
+    if (error){
+      console.log(error)
+    }
+    else {
+      res.send(body);
+    }
+  })
+});
+
+router.get('/marta-bus', function(req, res, next){
+  request(martaBus, function(error, response, body){
+    if (error){
+      console.log(error)
+    }
+    else {
+      res.send(body);
+    }
+  })
 });
 
 //Van adding routes

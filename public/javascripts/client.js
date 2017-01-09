@@ -1,4 +1,4 @@
-angular.module('martaApp', ['ui.router', 'ngResource'])
+angular.module('martaApp', ['ui.router'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider){
   $stateProvider
   .state('home', {
