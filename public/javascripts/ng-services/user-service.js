@@ -12,10 +12,10 @@ angular.module('martaApp')
 .service('userService', function($http) {
   console.log('userService is working!');
   this.getUsers = function() {
-    return $http.get("http://localhost:3000/users/");
+    return $http.get("/users/");
   };
   this.getOneUser = function(id) {
-    return $http.get("http://localhost:3000/users/" + id, {
+    return $http.get("/users/" + id, {
       params: { id:id}
     });
   };
@@ -25,7 +25,7 @@ angular.module('martaApp')
 // test service for ngResource
 .service('UsersService', function($resource){
   let vm = this;
-  vm.users = $resource("http://localhost:3000/users/:id", {id:'@id'});
+  vm.users = $resource("/users/:id", {id:'@id'});
   vm.getUser = function(id){
       console.log('hello frm getUser');
       vm.user = users.get({id:id});
@@ -56,7 +56,7 @@ angular.module('martaApp')
 //test controller
 .controller('getUsersController', ['$resource', '$http', function($resource, $http, UsersService){
   var vm = this;
-  var users = $resource("http://localhost:3000/users/:id", {id:'@id'});
+  var users = $resource("/users/:id", {id:'@id'});
   vm.getUser = function(id){
     vm.user = users.get({id:id},function(success){
       console.log('success', success);
@@ -69,6 +69,7 @@ angular.module('martaApp')
     // });
     console.log('foundUser is: ',vm.user);
   };
+
   // vm.getUser('587024073be0ce0b8d177128');
   // userService.getOneUser("5872e302551dae200b87733c")
   //  .then(function(response){
@@ -80,7 +81,7 @@ angular.module('martaApp')
   //  });
   //this adds favorites
   this.postUser = function(){
-    $http.post("http://localhost:3000/users/:id", {favorites:vm.favorites})
+    $http.post("/users/:id", {favorites:vm.favorites})
     .then(function(success){
       console.log(success);
     })
@@ -90,7 +91,7 @@ angular.module('martaApp')
   }
 
   this.removeThisFavorite = function(){
-    $http.put("http://localhost:3000/users/:id", {nonFavorites:vm.removeFavorite})
+    $http.put("/users/:id", {nonFavorites:vm.removeFavorite})
     .then(function(success){
       console.log('success',success);
     })

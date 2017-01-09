@@ -5,6 +5,7 @@ var User = require('../models/user');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log('signed in as:'+ currentUser);
   res.render('index');
 });
 
@@ -32,8 +33,8 @@ router.get('/users', function(req, res, next) {
 });
 
 router.get('/users/:id', function(req, res,next) {
-  // User.findById(req.params.id)
-  User.findById({id:currentUser.id})
+  User.findById(req.params.id)
+  // User.findById({id:currentUser.id})
   .then(function(user){
     if (!user) return next(makeError(res, 'User not found', 404));
     console.log('userjson is ', user);
@@ -144,9 +145,10 @@ router.post('/login',
   function(req, res, next){
     console.log('req.user is ' + req.user);
     global.currentUser = req.user;
+    // req.session.user = user;
     console.log('global user is '+ currentUser);
     // res.redirect('/users/' + req.user.id);
-    // res.redirect('/');
+    // res.redirect('/')
     console.log('attempting to login');
     console.log(req.body);
     var loginStrat = passport.authenticate('local-login', {
