@@ -1,4 +1,4 @@
-angular.module('martaApp', ['ui.router'])
+angular.module('martaApp', ['ui.router', 'ngResource']) //Kenny deleted the ngResource dependency in the deployed version
 .config(function($stateProvider, $urlRouterProvider, $locationProvider){
   $stateProvider
   .state('home', {
