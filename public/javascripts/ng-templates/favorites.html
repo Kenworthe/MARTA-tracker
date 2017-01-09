@@ -7,6 +7,9 @@
   <input placeholder="username" ng-model="$ctrl.user.user.username"/>
   <input placeholder="email" ng-model="$ctrl.user.user.local.email"/>
   <input type="text" placeholder="add favorites" ng-model="$ctrl.favorites"/>
+  <select>
+    <option ng-repeat="ctrl.favorites"></option>
+  </select>
   <input type="text" placeholder="remove favorites" ng-model="$ctrl.removeFavorite"/>
   <button ng-click="$ctrl.removeThisFavorite()">removeFavorite</button>
   <button ng-click="$ctrl.postUser()">post user</button>
