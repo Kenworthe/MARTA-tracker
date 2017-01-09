@@ -28,7 +28,7 @@ angular.module('martaApp')
   vm.users = $resource("http://localhost:3000/users/:id", {id:'@id'});
   vm.getUser = function(id){
       console.log('hello frm getUser');
-      vm.user = users.get({id:id});
+      vm.user = users.get({id:currentUser.id});
       console.log('user is ', vm.user);
     };
 
@@ -69,6 +69,7 @@ angular.module('martaApp')
     // });
     console.log('foundUser is: ',vm.user);
   };
+
   // vm.getUser('587024073be0ce0b8d177128');
   // userService.getOneUser("5872e302551dae200b87733c")
   //  .then(function(response){
