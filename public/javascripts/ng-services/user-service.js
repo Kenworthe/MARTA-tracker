@@ -7,6 +7,7 @@
 angular.module('martaApp')
 
 .service('userService', function($http){
+  this.selectedStop = 
   this.getUser = function(){
     return $http.get('/user');
   }
@@ -26,7 +27,7 @@ angular.module('martaApp')
 
   //this adds favorites
   this.postUser = function(){
-    $http.post("/users/:id", {favorites:vm.favorites})
+    $http.post('/users/:id', {favorites:vm.favorites})
     .then(function(success){
       console.log(success);
     })
