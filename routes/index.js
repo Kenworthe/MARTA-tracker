@@ -6,9 +6,20 @@ var User = require('../models/user');
 
 var martaRail = 'http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=e894d4a6-72ca-4268-94ec-af98560a3cc8';
 var martaBus = 'http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus';
+
+function authenticate(req, res, next) {
+	if(!req.isAuthenticated()) {
+		req.flash('error', 'Oops! You are not logged in. Please sign up or login to continue.');
+    console.log('authenticated failed!');
+		res.redirect('/');
+	}
+	else {
+		next();
+	}
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log('signed in as:'+ currentUser);
   res.render('index');
 });
 
@@ -53,18 +64,28 @@ router.get('/users', function(req, res, next) {
   });
 });
 
-router.get('/users/:id', function(req, res,next) {
-  User.findById(req.params.id)
-  // User.findById({id:currentUser.id})
-  .then(function(user){
-    if (!user) return next(makeError(res, 'User not found', 404));
-    console.log('userjson is ', user);
+router.get('/user', authenticate, function(req, res,next) {
+  // User.findById(req.params.id)
+  console.log('trying to find req.user', req.user);
+  console.log('the current user is...', currentUser);
+  var data = {
+    username: req.user.username,
+    id: req.user._id,
+    favorites: req.user.favorites,
+    email: req.user.local.email
+  };
+  res.send(data);
 
-    res.json({ user: user});
-  })
-  .catch(function(err) {
-    return next(err);
-  });
+  // User.findById({id:currentUser.id})
+  // .then(function(user){
+  //   if (!user) return next(makeError(res, 'User not found', 404));
+  //   console.log('userjson is ', user);
+  //
+  //   res.json({ user: user});
+  // })
+  // .catch(function(err) {
+  //   return next(err);
+  // });
 });
 
 // router.post('/users/:id/favorites', function(req, res,next) {
@@ -162,24 +183,37 @@ router.post('/signup', function(req, res, next) {
 
 //POST login -> check passport
 router.post('/login',
-  passport.authenticate('local-login', {session:false}),
-  function(req, res, next){
-    console.log('req.user is ' + req.user);
-    global.currentUser = req.user;
+  passport.authenticate('local-login', {
+    session: true,
+    successRedirect: '/',
+    failureRedirect: '/login',
+  })
+  // function(req, res, next){
+  //   // var config = {userId: 'id', pa}
+  //   console.log('req  is ', req.body);
+  //   console.log('req.user  is ', req.user);
+
+    // res.render('index', {currentUserid:currentUser.id});
     // req.session.user = user;
-    console.log('global user is '+ currentUser);
+    // console.log('global user is '+ currentUser);
     // res.redirect('/users/' + req.user.id);
     // res.redirect('/')
-    console.log('attempting to login');
-    console.log(req.body);
-    var loginStrat = passport.authenticate('local-login', {
-        successRedirect: '/',
-        currentUser: req.user,
-        failureRedirect: '/login',
-        failureFlash: true
-    });
+    // console.log('attempting to login');
+    // console.log(req.body);
+    // var loginStrat = passport.authenticate('local-login', {
+    //     successRedirect: '/',
+    //     failureRedirect: '/login',
+    //     failureFlash: true
+    // });
     // res.redirect('/users' + req.user.id);
-    return loginStrat(req, res, next);
-});
+    // loginStrat(req, res, next)
+    // .then(function(success){
+    //   console.log(success);
+    // })
+    // .catch(function(err){
+    //   console.log(err);
+    // })
+// }
+);
 
 module.exports = router;

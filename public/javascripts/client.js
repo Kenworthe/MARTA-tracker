@@ -31,9 +31,25 @@ angular.module('martaApp', ['ui.router', 'ngResource']) //Kenny deleted the ngRe
   // .html5Mode({ enabled: true, requireBase: false });
 
 })
-.controller('homeController', function() {
+.controller('homeController', function($http) {
   console.log('homeController is alive!');
   this.title = 'Homepage';
+  // console.log('req.body is: ' + res.body);
+  this.findUser = function(){
+
+  $http({
+    method:'GET',
+    url: '/login',
+  })
+  .then(function(success){
+    console.log('success was:', success);
+    console.log(currentUser);
+  })
+  .catch(function(err){
+    console.log('error:' + err);
+  })
+};
+this.findUser();
 })
 .controller('resultsController', function() {
   console.log('resultsController is alive!');
