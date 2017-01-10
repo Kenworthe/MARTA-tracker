@@ -54,20 +54,9 @@ router.get('/marta-bus', function(req, res, next){
 });
 
 //Van adding routes
-router.get('/users', function(req, res, next) {
-  User.find({})
-  .then(function(users){
-    res.json( {users: users});
-  })
-  .catch(function(err){
-    return next(err);
-  });
-});
-
+//GET logged in user and send to angular
 router.get('/user', authenticate, function(req, res,next) {
   // User.findById(req.params.id)
-  console.log('trying to find req.user', req.user);
-  console.log('the current user is...', currentUser);
   var data = {
     username: req.user.username,
     id: req.user._id,
@@ -75,69 +64,27 @@ router.get('/user', authenticate, function(req, res,next) {
     email: req.user.local.email
   };
   res.send(data);
-
-  // User.findById({id:currentUser.id})
-  // .then(function(user){
-  //   if (!user) return next(makeError(res, 'User not found', 404));
-  //   console.log('userjson is ', user);
-  //
-  //   res.json({ user: user});
-  // })
-  // .catch(function(err) {
-  //   return next(err);
-  // });
 });
 
-// router.post('/users/:id/favorites', function(req, res,next) {
-//   User.findById(req.params.id)
-//   .then(function(user){
-//     if (!user) return next(makeError(res, 'User not found', 404));
-//     User.favorites = 'this';
-//     res.json({ favorites: user.username});
-//   })
-//   .catch(function(err) {
-//     return next(err);
-//   });
-// });
-
-
-
-
-// router.put('/users/:id/', function(req, res,next) {
-//   User.findById(req.params.id, function(err, user){
-//     if(err){
-//       res.status(500).send(err);
-//     } else{
-//       // user.favorites.$push:'first';
-//       user.favorites = $push.favorites('5 Points');
-//       user.save(function(err, user){
-//         if (err){
-//           res.status(500).send(err);
-//         } else {
-//           res.send(user);
-//         }
-//       });
-//     }
-//   });
-
-//changed put to post
-  router.post('/users/:id', function(req, res, next){
-    console.log('POSTING req.body is : ',req.body);
-    User.findOneAndUpdate(
-      {_id: currentUser.id},
-      { $addToSet: {favorites: req.body.favorites }},
-      // { $pull:     {favorites: req.body.removeFavorite}},
-      {safe: true, upsert: true, new:true},
-      function(err, user){
-        if(err){
-          console.log(err);
-        } else {
-          console.log(user);
-        }
+//add favorite to favorites route
+router.post('/users/:id', function(req, res, next){
+  console.log('POSTING req.body is : ',req.body);
+  User.findOneAndUpdate(
+    {_id: currentUser.id},
+    { $addToSet: {favorites: req.body.favorites }},
+    // { $pull:     {favorites: req.body.removeFavorite}},
+    {safe: true, upsert: true, new:true},
+    function(err, user){
+      if(err){
+        console.log(err);
+      } else {
+        console.log(user);
       }
-  );
+    }
+);
 });
 
+//remove favorite from favorites array
 router.put('/users/:id', function(req, res, next){
   console.log('DELETING req.body is:', req.body);
   User.findOneAndUpdate(
@@ -154,18 +101,12 @@ router.put('/users/:id', function(req, res, next){
 );
 });
 
-router.delete('/users/587024073be0ce0b8d177128', function(req, res,next) {
-  // .delete( function (req, res) {     // <===== defined inside 'put',
-  User.findOneAndRemove( {id: req.params.id}, function (err,res){
-    res.json( {
-      message: 'got rid of this user',
-      user: result
-    });
-  })
-
-  });
-
-
+//LOGOUT
+router.get('/logout', function(req,res){
+  req.logout();
+  console.log('successfully logged out!');
+  res.redirect('/');
+})
 // end of Van adding routes
 
 /* POST SIGN UP */
