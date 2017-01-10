@@ -10,4 +10,5 @@ function searchBarController(busService, railService, $filter) {
     let self = this;
     self.trains = railService.trains;
     self.buses = busService.buses;
+  self.both= railService.trains.concat(busService.buses);
 }

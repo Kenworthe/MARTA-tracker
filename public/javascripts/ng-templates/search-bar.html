@@ -1,12 +1,28 @@
 <p>Hello I am the search bar!</p>
-<p>Search Bus Here!</p>
-<input type="text" placeholder="Train Station Search" ng-model="trainFilter">
+<form name= "myForm">
+<input name="myField" type="text" placeholder="Train Station Search" ng-model="bothFilter" required>
+<button>Submit</button>
+<!-- <span ng-hide="myForm.myField.$error.required"> -->
 
-{{$ctrl.trains | filter:trainFilter}}
-<hr>
-<p>Search Train Here!</p>
-<input type="text" placeholder="Bus Timepoint Search" ng-model="busFilter">
-{{$ctrl.buses | filter:busFilter}}
+<span ng-hide="myForm.myField.$error.required">
+ <ul ng-repeat = "items in $ctrl.both | filter:bothFilter">
+
+   <a href ="/#!/results"> <li><strong>{{items}}</a></strong></li>
+
+ <ul>
+</span>
+
+</form>
+
+
+
+
+
+
+
+<!-- <p>Search Train Here!</p>
+<input type="text" placeholder="Bus Timepoint Search" ng-model="busFilter"> -->
+<!-- {{$ctrl.buses | filter:busFilter}} -->
 <!-- <input type="text" placeholder="Bus Search" ng-model="busFilter">
 
 [<span ng-repeat="train in $ctrl.trains |filter: trainFilter | orderBy:'STATION' as sortedPlaces" data-ng-if="sortedPlaces[$index-1].STATION!=train.STATION" value="{{train.STATION}}">{{train.STATION}},</span>]
