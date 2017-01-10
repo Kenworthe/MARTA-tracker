@@ -4,11 +4,11 @@ angular.module('martaApp')
 	controller: liveTickerController,
 	controllerAs: '$ctrl'
 })
-function liveTickerController(railService, busService, $filter, $timeout){
+function liveTickerController(railService, busService, userService, $filter, $timeout){
 	console.log('liveTickerController is alive!');
 	let self = this;
-	self.selectedStation = 'FIVE POINTS STATION';
-	self.selectedBusStop = 'BROOKHAVEN';
+	self.selectedStation = userService.userSelection;
+	self.selectedBusStop = userService.userSelection;
 	self.station = [];
 	self.busStop = [];
 	self.repeat = true;
@@ -20,7 +20,7 @@ function liveTickerController(railService, busService, $filter, $timeout){
 			self.station = $filter('filter')(response.data, { 'STATION': stationName });
 			console.log(self.station);
 			if (self.repeat){
-				$timeout(() => { self.getStationRepeat(self.selectedStation) }, 3000);
+				$timeout(() => { self.getStationRepeat(stationName) }, 3000);
 			}
 			else { return }
 		});
@@ -34,7 +34,7 @@ function liveTickerController(railService, busService, $filter, $timeout){
 			self.busStop = $filter('filter')(response.data, { 'TIMEPOINT': stopName });
 			console.log(self.busStop);
 			if (self.repeat){
-				$timeout(() => { self.getBusStopRepeat(self.selectedBusStop) }, 3000);
+				$timeout(() => { self.getBusStopRepeat(stopName) }, 3000);
 			}
 			else { return }
 		});

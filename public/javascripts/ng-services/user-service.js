@@ -7,8 +7,20 @@
 angular.module('martaApp')
 
 .service('userService', function($http){
-  this.selectedStop = 
-  this.getUser = function(){
+  let self = this;
+  self.userSelection = '';
+
+  // self.getuserSelection = function(){
+  //   console.log('getting user selection...', self.userSelection);
+  //   return self.userSelection;
+  // }
+  self.setUserSelection = function(newSelection){
+    console.log('current user selection is...', self.userSelection);
+    console.log('setting user stop to...', newSelection);
+    return self.userSelection = newSelection;
+  }
+
+  self.getUser = function(){
     return $http.get('/user');
   }
 })

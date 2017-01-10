@@ -5,10 +5,14 @@ angular.module('martaApp')
         controllerAs: '$ctrl'
     })
 
-function searchBarController(busService, railService, $filter) {
+function searchBarController(busService, railService, userService, $filter) {
     console.log('searchBarController is alive!');
     let self = this;
     self.trains = railService.trains;
     self.buses = busService.buses;
-  self.both= railService.trains.concat(busService.buses);
+  self.both = railService.trains.concat(busService.buses);
+    self.userSelection = userService.userSelection;
+    self.setSelection = function(input){
+        userService.userSelection = input;
+    };
 }
