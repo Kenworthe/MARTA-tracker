@@ -6,9 +6,20 @@ var User = require('../models/user');
 
 var martaRail = 'http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=e894d4a6-72ca-4268-94ec-af98560a3cc8';
 var martaBus = 'http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus';
+
+function authenticate(req, res, next) {
+	if(!req.isAuthenticated()) {
+		req.flash('error', 'Oops! You are not logged in. Please sign up or login to continue.');
+    console.log('authenticated failed!');
+		res.redirect('/');
+	}
+	else {
+		next();
+	}
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log('signed in as:'+ currentUser);
   res.render('index');
 });
 
@@ -43,80 +54,37 @@ router.get('/marta-bus', function(req, res, next){
 });
 
 //Van adding routes
-router.get('/users', function(req, res, next) {
-  User.find({})
-  .then(function(users){
-    res.json( {users: users});
-  })
-  .catch(function(err){
-    return next(err);
-  });
+//GET logged in user and send to angular
+router.get('/user', authenticate, function(req, res,next) {
+  // User.findById(req.params.id)
+  var data = {
+    username: req.user.username,
+    id: req.user._id,
+    favorites: req.user.favorites,
+    email: req.user.local.email
+  };
+  res.send(data);
 });
 
-router.get('/users/:id', function(req, res,next) {
-  User.findById(req.params.id)
-  // User.findById({id:currentUser.id})
-  .then(function(user){
-    if (!user) return next(makeError(res, 'User not found', 404));
-    console.log('userjson is ', user);
-
-    res.json({ user: user});
-  })
-  .catch(function(err) {
-    return next(err);
-  });
-});
-
-// router.post('/users/:id/favorites', function(req, res,next) {
-//   User.findById(req.params.id)
-//   .then(function(user){
-//     if (!user) return next(makeError(res, 'User not found', 404));
-//     User.favorites = 'this';
-//     res.json({ favorites: user.username});
-//   })
-//   .catch(function(err) {
-//     return next(err);
-//   });
-// });
-
-
-
-
-// router.put('/users/:id/', function(req, res,next) {
-//   User.findById(req.params.id, function(err, user){
-//     if(err){
-//       res.status(500).send(err);
-//     } else{
-//       // user.favorites.$push:'first';
-//       user.favorites = $push.favorites('5 Points');
-//       user.save(function(err, user){
-//         if (err){
-//           res.status(500).send(err);
-//         } else {
-//           res.send(user);
-//         }
-//       });
-//     }
-//   });
-
-//changed put to post
-  router.post('/users/:id', function(req, res, next){
-    console.log('POSTING req.body is : ',req.body);
-    User.findOneAndUpdate(
-      {_id: currentUser.id},
-      { $addToSet: {favorites: req.body.favorites }},
-      // { $pull:     {favorites: req.body.removeFavorite}},
-      {safe: true, upsert: true, new:true},
-      function(err, user){
-        if(err){
-          console.log(err);
-        } else {
-          console.log(user);
-        }
+//add favorite to favorites route
+router.post('/users/:id', function(req, res, next){
+  console.log('POSTING req.body is : ',req.body);
+  User.findOneAndUpdate(
+    {_id: currentUser.id},
+    { $addToSet: {favorites: req.body.favorites }},
+    // { $pull:     {favorites: req.body.removeFavorite}},
+    {safe: true, upsert: true, new:true},
+    function(err, user){
+      if(err){
+        console.log(err);
+      } else {
+        console.log(user);
       }
-  );
+    }
+);
 });
 
+//remove favorite from favorites array
 router.put('/users/:id', function(req, res, next){
   console.log('DELETING req.body is:', req.body);
   User.findOneAndUpdate(
@@ -133,18 +101,12 @@ router.put('/users/:id', function(req, res, next){
 );
 });
 
-router.delete('/users/587024073be0ce0b8d177128', function(req, res,next) {
-  // .delete( function (req, res) {     // <===== defined inside 'put',
-  User.findOneAndRemove( {id: req.params.id}, function (err,res){
-    res.json( {
-      message: 'got rid of this user',
-      user: result
-    });
-  })
-
-  });
-
-
+//LOGOUT
+router.get('/logout', function(req,res){
+  req.logout();
+  console.log('successfully logged out!');
+  res.redirect('/');
+})
 // end of Van adding routes
 
 /* POST SIGN UP */
@@ -162,24 +124,37 @@ router.post('/signup', function(req, res, next) {
 
 //POST login -> check passport
 router.post('/login',
-  passport.authenticate('local-login', {session:false}),
-  function(req, res, next){
-    console.log('req.user is ' + req.user);
-    global.currentUser = req.user;
+  passport.authenticate('local-login', {
+    session: true,
+    successRedirect: '/',
+    failureRedirect: '/login',
+  })
+  // function(req, res, next){
+  //   // var config = {userId: 'id', pa}
+  //   console.log('req  is ', req.body);
+  //   console.log('req.user  is ', req.user);
+
+    // res.render('index', {currentUserid:currentUser.id});
     // req.session.user = user;
-    console.log('global user is '+ currentUser);
+    // console.log('global user is '+ currentUser);
     // res.redirect('/users/' + req.user.id);
     // res.redirect('/')
-    console.log('attempting to login');
-    console.log(req.body);
-    var loginStrat = passport.authenticate('local-login', {
-        successRedirect: '/',
-        currentUser: req.user,
-        failureRedirect: '/login',
-        failureFlash: true
-    });
+    // console.log('attempting to login');
+    // console.log(req.body);
+    // var loginStrat = passport.authenticate('local-login', {
+    //     successRedirect: '/',
+    //     failureRedirect: '/login',
+    //     failureFlash: true
+    // });
     // res.redirect('/users' + req.user.id);
-    return loginStrat(req, res, next);
-});
+    // loginStrat(req, res, next)
+    // .then(function(success){
+    //   console.log(success);
+    // })
+    // .catch(function(err){
+    //   console.log(err);
+    // })
+// }
+);
 
 module.exports = router;

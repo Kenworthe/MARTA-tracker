@@ -1,4 +1,4 @@
-angular.module('martaApp', ['ui.router'])
+angular.module('martaApp', ['ui.router', 'ngResource']) //Kenny deleted the ngResource dependency in the deployed version
 .config(function($stateProvider, $urlRouterProvider, $locationProvider){
   $stateProvider
   .state('home', {
@@ -31,7 +31,7 @@ angular.module('martaApp', ['ui.router'])
   // .html5Mode({ enabled: true, requireBase: false });
 
 })
-.controller('homeController', function() {
+.controller('homeController', function($http) {
   console.log('homeController is alive!');
   this.title = 'Homepage';
 })
