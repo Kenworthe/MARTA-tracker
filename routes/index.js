@@ -89,7 +89,7 @@ router.put('/users/:id', function(req, res, next){
   console.log('DELETING req.body is:', req.body);
   User.findOneAndUpdate(
     {_id: currentUser.id},
-    { $pullAll: {favorites: [req.body.nonFavorites]}},
+    { $pullAll: {favorites: [req.body.favorites]}},
     {safe: true, upsert: true, new:true},
     function(err, user){
       if(err){
@@ -111,7 +111,6 @@ router.get('/logout', function(req,res){
 
 /* POST SIGN UP */
 router.post('/signup', function(req, res, next) {
-  console.log('posting signup user:');
   console.log(req.body);
   var signUpStrategy = passport.authenticate('local-signup', {
     successRedirect: '/',

@@ -14,3 +14,11 @@
   <button ng-click="$ctrl.removeThisFavorite()">removeFavorite</button>
   <button ng-click="$ctrl.postUser()">post user</button>
   <!-- <input/> -->
+
+  <div ng-repeat="bus in $ctrl.buses">
+    <li ng-model="$ctrl.favorites" ng-click="$ctrl.setSelected(bus)">{{bus}}</li>
+    <button ng-click="$ctrl.postUser(bus)">add</button>
+    <button ng-click="$ctrl.removeThisFavorite(bus)">x</button>
+  </div>
+
+  <p ng-click="userService.getUser()">test click</p>
