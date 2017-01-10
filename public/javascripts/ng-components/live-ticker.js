@@ -9,23 +9,9 @@ function liveTickerController(railService, busService, $filter, $timeout){
 	let self = this;
 	self.selectedStation = 'FIVE POINTS STATION';
 	self.selectedBusStop = 'BROOKHAVEN';
-	self.trains = [];
 	self.station = [];
-	self.buses = [];
 	self.busStop = [];
 	self.repeat = true;
-
-	// self.getAllTrainsRepeat = function(){
-	// 	railService.getAllTrains()
-	// 	.then( (response) => {
-	// 		self.trains = response.data;
-	// 		if (self.repeat){
-	// 			$timeout(self.getAllTrainsRepeat, 3000);
-	// 		}
-	// 		else { return }
-	// 	});
-	// }
-	// self.getAllTrainsRepeat();
 
 	self.getStationRepeat = function(stationName){
 		console.log(stationName);
