@@ -1,9 +1,3 @@
-//hello van
-// reorder favorites
-// UPDATE email address (with check for already taken)
-// UPDATE username (with check for already taken)
-// UPDATE password (with confirm password and current password)
-// DELETE user (close account, with client side validation)
 angular.module('martaApp')
 
 .service('userService', function($http){
@@ -14,11 +8,11 @@ angular.module('martaApp')
   //   console.log('getting user selection...', self.userSelection);
   //   return self.userSelection;
   // }
-  self.setUserSelection = function(newSelection){
-    console.log('current user selection is...', self.userSelection);
-    console.log('setting user stop to...', newSelection);
-    return self.userSelection = newSelection;
-  }
+  // self.setUserSelection = function(newSelection){
+  //   console.log('current user selection is...', self.userSelection);
+  //   console.log('setting user stop to...', newSelection);
+  //   return self.userSelection = newSelection;
+  // }
 
   self.getUser = function(){
     return $http.get('/user');
