@@ -20,6 +20,15 @@
     <li ng-model="$ctrl.favorites" ng-click="$ctrl.setSelected(bus)">{{favorite}}</li>
     <button ng-click="$ctrl.postUser(favorite)">add</button>
     <button ng-click="$ctrl.removeThisFavorite(favorite)">x</button>
+  <p>{{ $ctrl.user.favorites }}</p>
+</div>
+
+<div>
+  <input type="text" ng-model="$ctrl.selectedFavorite" placeholder="Add a Favorite station">
+  <button ng-click="$ctrl.addNewFavorite($ctrl.selectedFavorite)">add</button>
+
+  <div ng-repeat="favorite in $ctrl.user.favorites">
+    <li ng-model="$ctrl.selectedFavorite">{{ favorite }}<button ng-click="$ctrl.removeFavorite(favorite)">x</button></li>
   </div>
 
   <live-ticker ng-repeat="favorite in $ctrl.user.favorites"></live-ticker>

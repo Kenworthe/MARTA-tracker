@@ -64,38 +64,59 @@ router.get('/user', authenticate, function(req, res,next) {
 });
 
 //add favorite to favorites route
-router.post('/users/:id', function(req, res, next){
-  console.log('POSTING req.body is : ',req.body);
+// router.post('/users/:id', authenticate, function(req, res, next){
+router.post('/user', authenticate, function(req, res, next){
+  console.log('current user is...', currentUser);
+  console.log('POSTING... req.body:', req.body);
   User.findOneAndUpdate(
     {_id: currentUser.id},
-    { $addToSet: {favorites: req.body.favorites }},
-    // { $pull:     {favorites: req.body.removeFavorite}},
-    {safe: true, upsert: true, new:true},
-    function(err, user){
-      if(err){
-        console.log(err);
-      } else {
-        console.log(user);
-      }
-    }
-);
+    { $addToSet: {favorites: req.body.favorites }}
+    // {safe: true, upsert: true, new:true},
+    // function(err, user){
+    //   if (err){
+    //     console.log(err);
+    //   } 
+    //   else {
+    //     console.log(user);
+    //   }
+    // }
+  )
+  .then( function(response) {
+    console.log('POST SUCCESSFUL; response is...', response);
+    res.json(response);
+  })
+  .catch(function(err){
+    console.log(err);
+    return next;
+  })
 });
 
 //remove favorite from favorites array
-router.put('/users/:id', function(req, res, next){
-  console.log('DELETING req.body is:', req.body);
+// router.put('/users/:id', authenticate, function(req, res, next){
+router.put('/user', authenticate, function(req, res, next){
+  console.log('current user is...', currentUser);
+  console.log('DELETING... req.body:', req.body);
   User.findOneAndUpdate(
     {_id: currentUser.id},
-    { $pullAll: {favorites: [req.body.favorites]}},
-    {safe: true, upsert: true, new:true},
-    function(err, user){
-      if(err){
-        console.log(err);
-      } else {
-        console.log(user);
-      }
-    }
-);
+    { $pullAll: {favorites: [req.body.favorites]}}
+    // {safe: true, upsert: true, new:true},
+    // function(err, user){
+    //   if (err){
+    //     console.log(err);
+    //   } 
+    //   else {
+    //     console.log(user);
+    //   }
+    // }
+  )
+  .then( function(response) {
+    console.log('PUT SUCCESSFUL; response is...', response);
+    res.json(response);
+  })
+  .catch(function(err){
+    console.log(err);
+    return next;
+  })
 });
 
 //LOGOUT
@@ -104,7 +125,6 @@ router.get('/logout', function(req,res){
   console.log('successfully logged out!');
   res.redirect('/');
 })
-// end of Van adding routes
 
 /* POST SIGN UP */
 router.post('/signup', function(req, res, next) {
@@ -125,32 +145,6 @@ router.post('/login',
     successRedirect: '/#!/favorites',
     failureRedirect: '/login',
   })
-  // function(req, res, next){
-  //   // var config = {userId: 'id', pa}
-  //   console.log('req  is ', req.body);
-  //   console.log('req.user  is ', req.user);
-
-    // res.render('index', {currentUserid:currentUser.id});
-    // req.session.user = user;
-    // console.log('global user is '+ currentUser);
-    // res.redirect('/users/' + req.user.id);
-    // res.redirect('/')
-    // console.log('attempting to login');
-    // console.log(req.body);
-    // var loginStrat = passport.authenticate('local-login', {
-    //     successRedirect: '/',
-    //     failureRedirect: '/login',
-    //     failureFlash: true
-    // });
-    // res.redirect('/users' + req.user.id);
-    // loginStrat(req, res, next)
-    // .then(function(success){
-    //   console.log(success);
-    // })
-    // .catch(function(err){
-    //   console.log(err);
-    // })
-// }
 );
 
 module.exports = router;
