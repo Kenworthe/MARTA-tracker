@@ -8,44 +8,7 @@
 <!-- <div ng-init="buses = busService.getAllBuses()"</div>
 <div ng-init="trains= railService.getAllTrains()"</div> -->
 <div>
+<h3>Welcome to our MARTA App! Search for your station below!</h3>
+<section>
   <search-bar></search-bar>
-</div>
-
-
-
-<!-- <hr>
-<p>ignore below for now:</p>
-<label>Search: <input ng-model="searchTimepoint"></label>
-<table id="searchTimepointResults">
-  <tr><th>Bus TIMEPOINT</th></tr>
-  <tr ng-repeat="bus in buses | filter:searchTIMEPOINT">
-    <td>{{bus.TIMEPOINT}}</td>
-  </tr>
-</table>
-<label>Any: <input ng-model="search.$"></label> <br>
-<label>TIMEPOINT only <input ng-model="search.TIMEPOINT"></label><br>
-<label>Equality <input type="checkbox" ng-model="strict"></label><br>
-<table id="searchTimepointResults">
-  <tr ng-repeat="busObj.in buses | filter:search:strict">
-  <tr ng-filter: 'Timepoint' | 'TIMEPOINT': timepoint>
-    <td>{{bus.TIMEPOINT}}</td>
-  </tr>
-</table>
-<hr>
-<label>Search: <input ng-model="searchStation"></label>
-<table id="searchStationResults">
-  <tr><th>Train STATION</th></tr>
-  <tr ng-repeat="train in trains | filter:searchStation">
-    <td>{{train.STATION}}</td>
-  </tr>
-</table>
-<label>Any: <input ng-model="search.$"></label> <br>
-<label>STATION only <input ng-model="search.STATION"></label><br>
-<label>Equality <input type="checkbox" ng-model="strict"></label><br>
-<table id="searchStationResults">
-    < <tr ng-repeat="trainObj.in trains | filter:search:strict">
-    <tr ng-filter='Station' | 'STATION' : station>
-      <td>{{train.STATION}}</td>
-    </tr>
-  </table> -->
-</body>
+</section>

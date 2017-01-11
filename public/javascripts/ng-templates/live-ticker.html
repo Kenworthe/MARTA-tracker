@@ -1,26 +1,13 @@
-<p>hello from live ticker component!</p>
-
-<hr>
-
 <div>
-	<input ng-model="$ctrl.selectedStation" name="$ctrl.selectedStation">
-	<p>Showing stations for: {{$ctrl.selectedStation}}</p>
+	<p>Showing schedule for: {{$ctrl.selectedStation}}</p>
 </div>
 <ul>
-	<li ng-repeat="train in $ctrl.station">{{train.STATION}} : {{train.WAITING_SECONDS}} - {{train.WAITING_TIME}}</li>
+	<li ng-repeat="train in $ctrl.station">
+		{{train.LINE}} line, heading {{train.DIRECTION}} 
+		to {{train.DESTINATION}}: {{train.WAITING_TIME}} 
+		({{train.WAITING_SECONDS}} sec) <button>Add to Favorites</button>
+	</li>
+	<li ng-repeat="bus in $ctrl.busStop">
+		{{bus.TIMEPOINT}} : {{bus.LATITUDE}}, {{bus.LONGITUDE}}
+	</li>
 </ul>
-
-<div>
-	<input ng-model="$ctrl.selectedBusStop" name="$ctrl.selectedBusStop">
-	<p>Showing Bus Stop for: {{$ctrl.selectedBusStop}}</p>
-</div>
-<ul>
-	<li ng-repeat="bus in $ctrl.busStop">{{bus.TIMEPOINT}} : {{bus.LATITUDE}}, {{bus.LONGITUDE}}</li>
-</ul>
-<!--
-<hr>
-<h3>All train stations:</h3>
-<ul>
-	<li ng-repeat="train in $ctrl.trains">{{train.STATION}} : {{train.WAITING_SECONDS}} - {{train.WAITING_TIME}}</li>
-</ul>
-<hr>-->
