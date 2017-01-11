@@ -1,0 +1,19 @@
+<div class="navBar">
+  <a href=''><h2>[]</h2></a>
+  <p class="left">hellloooo {{$ctrl.user.username}}</p>
+
+  <h2 class="center" id="marta">MARTA scheduler</h2>
+  <div class="right">
+    <a ui-sref="/logout" class="right">Account</a><br>
+    <a href="/login" class="right" ng-hide="$ctrl.user.username">Login</a><br>
+    <a href="/logout" class="right" ng-show="$ctrl.user.username">Logout</a>
+  </div>
+</div>
+
+<div class="favorites">
+  <div>
+    <p ng-repeat="favorite in $ctrl.user.favorites">{{favorite}}</p>
+    <!-- <button ng-click="$ctrl.removeThisFavorite(bus)">x</button> -->
+  </div>
+
+</div>
