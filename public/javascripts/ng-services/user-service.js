@@ -32,23 +32,36 @@ angular.module('martaApp')
   });
 
   //this adds favorites
-  this.postUser = function(){
-    $http.post('/users/:id', {favorites:vm.favorites})
+  this.postUser = function(stop){
+    vm.favorites = stop;
+    $http.post("/users/:id", {favorites:vm.favorites})
     .then(function(success){
       console.log(success);
     })
     .catch(function(err){
       console.log(err);
     })
+    vm.favorites = {};
   }
 
-  this.removeThisFavorite = function(){
-    $http.put("/users/:id", {nonFavorites:vm.removeFavorite})
+  this.removeThisFavorite = function(stop){
+    vm.favorites = stop;
+    $http.put("/users/:id", {favorites:vm.favorites})
     .then(function(success){
       console.log('success',success);
     })
     .catch(function(err){
       console.log('error:',err);
     })
+    vm.favorites = {};
   }
+
+  // this.setSelected = function(stop){
+  //   vm.favorites = stop;
+  //   console.log(vm.favorites);
+  // }
+
+      this.buses = ['10th Chs Allen','Alabama & Broad St.','Alabama & Forsyth'];
+
+
 }]);
