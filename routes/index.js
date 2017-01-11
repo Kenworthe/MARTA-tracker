@@ -64,41 +64,59 @@ router.get('/user', authenticate, function(req, res,next) {
 });
 
 //add favorite to favorites route
-router.post('/users/:id', authenticate, function(req, res, next){
+// router.post('/users/:id', authenticate, function(req, res, next){
+router.post('/user', authenticate, function(req, res, next){
   console.log('current user is...', currentUser);
   console.log('POSTING... req.body:', req.body);
   User.findOneAndUpdate(
     {_id: currentUser.id},
-    { $addToSet: {favorites: req.body.favorites }},
-    {safe: true, upsert: true, new:true},
-    function(err, user){
-      if (err){
-        console.log(err);
-      } 
-      else {
-        console.log(user);
-      }
-    }
-  );
+    { $addToSet: {favorites: req.body.favorites }}
+    // {safe: true, upsert: true, new:true},
+    // function(err, user){
+    //   if (err){
+    //     console.log(err);
+    //   } 
+    //   else {
+    //     console.log(user);
+    //   }
+    // }
+  )
+  .then( function(response) {
+    console.log('POST SUCCESSFUL; response is...', response);
+    res.json(response);
+  })
+  .catch(function(err){
+    console.log(err);
+    return next;
+  })
 });
 
 //remove favorite from favorites array
-router.put('/users/:id', authenticate, function(req, res, next){
+// router.put('/users/:id', authenticate, function(req, res, next){
+router.put('/user', authenticate, function(req, res, next){
   console.log('current user is...', currentUser);
   console.log('DELETING... req.body:', req.body);
   User.findOneAndUpdate(
     {_id: currentUser.id},
-    { $pullAll: {favorites: [req.body.favorites]}},
-    {safe: true, upsert: true, new:true},
-    function(err, user){
-      if (err){
-        console.log(err);
-      } 
-      else {
-        console.log(user);
-      }
-    }
-  );
+    { $pullAll: {favorites: [req.body.favorites]}}
+    // {safe: true, upsert: true, new:true},
+    // function(err, user){
+    //   if (err){
+    //     console.log(err);
+    //   } 
+    //   else {
+    //     console.log(user);
+    //   }
+    // }
+  )
+  .then( function(response) {
+    console.log('PUT SUCCESSFUL; response is...', response);
+    res.json(response);
+  })
+  .catch(function(err){
+    console.log(err);
+    return next;
+  })
 });
 
 //LOGOUT

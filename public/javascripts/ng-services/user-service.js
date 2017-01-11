@@ -9,12 +9,13 @@ angular.module('martaApp')
   }
 
   self.postFavorite = function(station){
-    return $http.post('/users/:id', { favorites: station });
+    // return $http.post('/users/:id', { favorites: station });
+    return $http.post('/user', { favorites: station });
   }
 
   self.deleteFavorite = function(station){
-    return $http.put('/users/:id', { favorites: station });
-  
+    // return $http.put('/users/:id', { favorites: station });
+    return $http.put('/user', { favorites: station });
   // self.getuserSelection = function(){
   //   console.log('getting user selection...', self.userSelection);
   //   return self.userSelection;
