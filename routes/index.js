@@ -9,7 +9,6 @@ var martaBus = 'http://developer.itsmarta.com/BRDRestService/RestBusRealTimeServ
 
 function authenticate(req, res, next) {
 	if(!req.isAuthenticated()) {
-		req.flash('error', 'Oops! You are not logged in. Please sign up or login to continue.');
     console.log('authenticated failed!');
 		res.redirect('/');
 	}
@@ -53,15 +52,13 @@ router.get('/marta-bus', function(req, res, next){
   })
 });
 
-//Van adding routes
 //GET logged in user and send to angular
 router.get('/user', authenticate, function(req, res,next) {
-  // User.findById(req.params.id)
   var data = {
-    username: req.user.username,
     id: req.user._id,
-    favorites: req.user.favorites,
-    email: req.user.local.email
+    username: req.user.username,
+    email: req.user.local.email,
+    favorites: req.user.favorites
   };
   res.send(data);
 });
@@ -125,7 +122,7 @@ router.post('/signup', function(req, res, next) {
 router.post('/login',
   passport.authenticate('local-login', {
     session: true,
-    successRedirect: '/',
+    successRedirect: '/#!/favorites',
     failureRedirect: '/login',
   })
   // function(req, res, next){
