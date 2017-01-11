@@ -43,7 +43,3 @@ angular.module('martaApp', ['ui.router']) //Kenny deleted the ngResource depende
   console.log('favoritesController is alive!');
   this.title = 'favorites page';
 })
-.controller('profileController', function() {
-  console.log('profileController is alive!');
-  this.title = 'profile page';
-})

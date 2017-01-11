@@ -1,1 +1,18 @@
-<p>{{ $ctrl.title }} content goes here</p>
+<div class="profile">
+  <h1>Account Details</h1>
+  <h2>username: {{ $ctrl.user.username }} </h2><br>
+  <h2>email: {{ $ctrl.user.email }} </h2>
+  <h2 ng-show="$ctrl.user.username">your current favorites:</h2>
+  <div ng-repeat="favorite in $ctrl.user.favorites">
+    <p>{{favorite}}</p>
+    <p ng-click="$ctrl.removeFavorite(favorite)">remove</p>
+  </div>
+
+  <label>browse trains</label>
+  <select ng-model="$ctrl.add">
+    <option ng-repeat="train in $ctrl.trains" ng-model="$ctrl.train">{{train}}</option>
+  </select>
+  <p ng-click="$ctrl.addNewFavorite($ctrl.train)">add to favorite</p>
+</div>
+
+<p>{{$ctrl.user}}</p>

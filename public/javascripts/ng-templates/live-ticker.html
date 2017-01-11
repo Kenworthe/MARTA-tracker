@@ -1,15 +1,16 @@
-<div>
-	<p>Showing schedule for: {{$ctrl.selectedStation}}</p>
+<div class="results">
+		<div>
+			<p>Showing schedule for: {{$ctrl.selectedStation}}</p>
+			<button ng-click="$ctrl.selectFavorite($ctrl.selectedStation)">Add {{$ctrl.selectedStation}} to Favorites</button>
+		</div>
+		<ul>
+			<li ng-repeat="train in $ctrl.station" ng-class="{'red': train.LINE == 'RED', 'green': train.LINE == 'GREEN', 'gold': train.LINE == 'GOLD', 'blue': train.LINE == 'BLUE'}">
+				{{train.LINE}} line, heading {{train.DIRECTION}}
+				to {{train.DESTINATION}}: {{train.WAITING_TIME}}
+				({{train.WAITING_SECONDS}} sec)
+			</li>
+			<!-- <li ng-repeat="bus in $ctrl.busStop">
+				{{bus.TIMEPOINT}} : {{bus.LATITUDE}}, {{bus.LONGITUDE}}
+			</li> -->
+		</ul>
 </div>
-
-<button ng-click="$ctrl.selectFavorite($ctrl.selectedStation)">Add {{$ctrl.selectedStation}} to Favorites</button>
-<ul>
-	<li ng-repeat="train in $ctrl.station">
-		{{train.LINE}} line, heading {{train.DIRECTION}} 
-		to {{train.DESTINATION}}: {{train.WAITING_TIME}} 
-		({{train.WAITING_SECONDS}} sec) 
-	</li>
-	<!--<li ng-repeat="bus in $ctrl.busStop">
-		{{bus.TIMEPOINT}} : {{bus.LATITUDE}}, {{bus.LONGITUDE}}
-	</li>-->
-</ul>

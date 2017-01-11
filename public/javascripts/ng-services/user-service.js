@@ -10,7 +10,6 @@ angular.module('martaApp')
     return $http.get('/user');
   }
 
-
   self.getUserInfo = function(){
     $http.get('/user')
     .then(function(response){
@@ -30,7 +29,7 @@ angular.module('martaApp')
   }
 
   self.getUserInfo();
-
+  
   self.postFavorite = function(station){
     // return $http.post('/users/:id', { favorites: station });
     return $http.post('/user', { favorites: station });
