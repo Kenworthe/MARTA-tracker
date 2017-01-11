@@ -64,8 +64,9 @@ router.get('/user', authenticate, function(req, res,next) {
 });
 
 //add favorite to favorites route
-router.post('/users/:id', function(req, res, next){
-  console.log('POSTING req.body is : ',req.body);
+router.post('/users/:id', authenticate, function(req, res, next){
+  console.log('current user is...', currentUser);
+  console.log('POSTING... req.body:', req.body);
   User.findOneAndUpdate(
     {_id: currentUser.id},
     { $addToSet: {favorites: req.body.favorites }},
@@ -82,8 +83,9 @@ router.post('/users/:id', function(req, res, next){
 });
 
 //remove favorite from favorites array
-router.put('/users/:id', function(req, res, next){
-  console.log('DELETING req.body is:', req.body);
+router.put('/users/:id', authenticate, function(req, res, next){
+  console.log('current user is...', currentUser);
+  console.log('DELETING... req.body:', req.body);
   User.findOneAndUpdate(
     {_id: currentUser.id},
     { $pullAll: {favorites: [req.body.favorites]}},
