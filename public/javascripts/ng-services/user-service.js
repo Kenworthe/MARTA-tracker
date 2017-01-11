@@ -3,11 +3,33 @@ angular.module('martaApp')
 .service('userService', function($http){
   let self = this;
   self.userSelection = '';
+  self.user = {};
+  self.favorites = [];
 
   self.getUser = function(){
     return $http.get('/user');
   }
 
+  self.getUserInfo = function(){
+    $http.get('/user')
+    .then(function(response){
+      if (response.data.id){
+        self.user = response.data;
+        self.favorites = response.data.favorites;
+        console.log(self.user);
+        console.log(self.favorites);
+      }
+      else {
+        console.log('response.data did not include user.id.\nPlease log in to continue.');
+      }
+    })
+    .catch(function(err){
+      console.log(err);
+    })
+  }
+
+  self.getUserInfo();
+  
   self.postFavorite = function(station){
     // return $http.post('/users/:id', { favorites: station });
     return $http.post('/user', { favorites: station });
@@ -30,7 +52,7 @@ angular.module('martaApp')
 
 .controller('userController', function(userService){
   console.log('userController is alive!');
-  
+
   let vm = this;
   vm.user = {};
   vm.favorites = [];

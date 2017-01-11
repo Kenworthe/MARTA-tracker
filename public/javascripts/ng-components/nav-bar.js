@@ -7,14 +7,24 @@ angular.module('martaApp')
 function navBarController(userService){
   var vm = this;
   vm.user = {};
-  userService.getUser()
-  .then(function(response){
-    vm.user = response.data;
-    console.log(vm.user);
-  })
-  .catch(function(err){
-    console.log(err);
-  });
+
+  vm.getUserInfo = function(){
+    userService.getUser()
+    .then(function(response){
+      if (response.data.id){
+        vm.user = response.data;
+        console.log(vm.user);
+      }
+      else {
+        console.log('response.data did not include user.id.\nPlease log in to continue.');
+      }
+    })
+    .catch(function(err){
+      console.log(err);
+    })
+  }
+
+  vm.getUserInfo();
 
   vm.removeFavorite = function(station){
     userService.deleteFavorite(station)
@@ -26,7 +36,6 @@ function navBarController(userService){
       console.log(err);
     })
   }
-
 }
 
 // this.removeFavorite = function(station){

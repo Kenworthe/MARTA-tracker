@@ -7,15 +7,15 @@
     <!-- <a ui-sref="/logout">Account</a><br> -->
     <a href="/login" ng-hide="$ctrl.user.username" >Login</a><br>
     <a href="/logout"  ng-show="$ctrl.user.username">Logout</a>
-    <a ui-sref="favorites"><p>{{$ctrl.user.username}}</p></a>
+    <a ui-sref="profile"><p>{{$ctrl.user.username}}</p></a>
   </div>
 </div>
 
-<div class="favorites">
-  <p>></p>
+<div class="favorites fixed">
+  <!-- <p>></p> -->
   <div ng-repeat="favorite in $ctrl.user.favorites" class="favorite">
     <p>{{favorite}}</p>
-    <span ng-click="$ctrl.removeFavorite(favorite)">x</span>
+    <p ng-click="$ctrl.removeFavorite(favorite)">x</p>
   </div>
 
 </div>
