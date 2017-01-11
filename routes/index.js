@@ -69,16 +69,16 @@ router.post('/users/:id', function(req, res, next){
   User.findOneAndUpdate(
     {_id: currentUser.id},
     { $addToSet: {favorites: req.body.favorites }},
-    // { $pull:     {favorites: req.body.removeFavorite}},
     {safe: true, upsert: true, new:true},
     function(err, user){
-      if(err){
+      if (err){
         console.log(err);
-      } else {
+      } 
+      else {
         console.log(user);
       }
     }
-);
+  );
 });
 
 //remove favorite from favorites array
@@ -89,13 +89,14 @@ router.put('/users/:id', function(req, res, next){
     { $pullAll: {favorites: [req.body.favorites]}},
     {safe: true, upsert: true, new:true},
     function(err, user){
-      if(err){
+      if (err){
         console.log(err);
-      } else {
+      } 
+      else {
         console.log(user);
       }
     }
-);
+  );
 });
 
 //LOGOUT
@@ -104,7 +105,6 @@ router.get('/logout', function(req,res){
   console.log('successfully logged out!');
   res.redirect('/');
 })
-// end of Van adding routes
 
 /* POST SIGN UP */
 router.post('/signup', function(req, res, next) {
@@ -125,32 +125,6 @@ router.post('/login',
     successRedirect: '/#!/favorites',
     failureRedirect: '/login',
   })
-  // function(req, res, next){
-  //   // var config = {userId: 'id', pa}
-  //   console.log('req  is ', req.body);
-  //   console.log('req.user  is ', req.user);
-
-    // res.render('index', {currentUserid:currentUser.id});
-    // req.session.user = user;
-    // console.log('global user is '+ currentUser);
-    // res.redirect('/users/' + req.user.id);
-    // res.redirect('/')
-    // console.log('attempting to login');
-    // console.log(req.body);
-    // var loginStrat = passport.authenticate('local-login', {
-    //     successRedirect: '/',
-    //     failureRedirect: '/login',
-    //     failureFlash: true
-    // });
-    // res.redirect('/users' + req.user.id);
-    // loginStrat(req, res, next)
-    // .then(function(success){
-    //   console.log(success);
-    // })
-    // .catch(function(err){
-    //   console.log(err);
-    // })
-// }
 );
 
 module.exports = router;
