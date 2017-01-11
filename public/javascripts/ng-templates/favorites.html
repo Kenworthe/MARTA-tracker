@@ -1,26 +1,15 @@
 <div>
   <h3>Logged in as username: {{ $ctrl.user.username }}</h3>
-  <p>List of favorites: {{ $ctrl.user.favorites }}</p>
+  <p>{{ $ctrl.user.favorites }}</p>
 </div>
 
 <div>
-  <input placeholder="username" ng-model="$ctrl.user.username"/>
-  <input placeholder="email" ng-model="$ctrl.user.email"/>
-  <input type="text" placeholder="add favorites" ng-model="$ctrl.favorites"/>
-  <select>
-    <option ng-repeat="favorite in $ctrl.user.favorites">{{favorite}}</option>
-  </select>
-  <input type="text" placeholder="remove favorites" ng-model="$ctrl.removeFavorite"/>
-  <button ng-click="$ctrl.removeThisFavorite()">removeFavorite</button>
-  <button ng-click="$ctrl.postUser()">post user</button>
-  <!-- <input/> -->
+  <input type="text" ng-model="$ctrl.selectedFavorite" placeholder="Add a Favorite station">
+  <button ng-click="$ctrl.addNewFavorite($ctrl.selectedFavorite)">add</button>
 
-  <live-ticker ng-repeat="favorite in $ctrl.user.favorites"></live-ticker>
-
-  <div ng-repeat="bus in $ctrl.buses">
-    <li ng-model="$ctrl.favorites" ng-click="$ctrl.setSelected(bus)">{{bus}}</li>
-    <button ng-click="$ctrl.postUser(bus)">add</button>
-    <button ng-click="$ctrl.removeThisFavorite(bus)">x</button>
+  <div ng-repeat="favorite in $ctrl.user.favorites">
+    <li ng-model="$ctrl.selectedFavorite">{{ favorite }}<button ng-click="$ctrl.removeFavorite(favorite)">x</button></li>
+   
   </div>
 
 </div>

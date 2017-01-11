@@ -16,7 +16,7 @@ angular.module('martaApp', ['ui.router']) //Kenny deleted the ngResource depende
   .state('favorites', {
     url: '/favorites',
     templateUrl: '/javascripts/ng-templates/favorites.html',
-    controller: 'getUsersController',
+    controller: 'userController',
     controllerAs: '$ctrl'
   })
   .state('profile', {
@@ -31,7 +31,7 @@ angular.module('martaApp', ['ui.router']) //Kenny deleted the ngResource depende
   // .html5Mode({ enabled: true, requireBase: false });
 
 })
-.controller('homeController', function($http) {
+.controller('homeController', function() {
   console.log('homeController is alive!');
   this.title = 'Homepage';
 })

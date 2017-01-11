@@ -17,51 +17,60 @@ angular.module('martaApp')
   self.getUser = function(){
     return $http.get('/user');
   }
+
+  self.postFavorite = function(station){
+    return $http.post('/users/:id', { favorites: station });
+  }
+
+  self.deleteFavorite = function(station){
+    return $http.put('/users/:id', { favorites: station });
+
+  }
 })
 
-.controller('getUsersController', ['$http', 'userService', function($http, userService){
-  var vm = this;
+.controller('userController', function(userService){
+  console.log('userController is alive!');
+  
+  let vm = this;
   vm.user = {};
-  userService.getUser()
-  .then(function(response){
-    vm.user = response.data;
-    console.log(vm.user);
-  })
-  .catch(function(err){
-    console.log(err);
-  });
+  vm.favorites = [];
+  vm.selectedFavorite = '';
 
-  //this adds favorites
-  this.postUser = function(stop){
-    vm.favorites = stop;
-    $http.post("/users/:id", {favorites:vm.favorites})
-    .then(function(success){
-      console.log(success);
+  vm.getUserInfo = function(){
+    userService.getUser()
+    .then(function(response){
+      vm.user = response.data;
+      console.log(vm.user);
+      console.log(vm.user.favorites);
+      vm.favorites = response.data.favorites;
     })
     .catch(function(err){
       console.log(err);
     })
-    vm.favorites = {};
   }
+  //fetch fresh user data upon loading state
+  vm.getUserInfo();
 
-  this.removeThisFavorite = function(stop){
-    vm.favorites = stop;
-    $http.put("/users/:id", {favorites:vm.favorites})
-    .then(function(success){
-      console.log('success',success);
+  vm.addNewFavorite = function(station){
+    userService.postFavorite(station)
+    .then(function(){
+      vm.getUserInfo();
+      console.log('post successfull! here is the new user: ', vm.user.favorites)
     })
     .catch(function(err){
-      console.log('error:',err);
+      console.log(err);
     })
-    vm.favorites = {};
   }
 
-  // this.setSelected = function(stop){
-  //   vm.favorites = stop;
-  //   console.log(vm.favorites);
-  // }
-
-      this.buses = ['10th Chs Allen','Alabama & Broad St.','Alabama & Forsyth'];
-
-
-}]);
+  vm.removeFavorite = function(station){
+    userService.deleteFavorite(station)
+    .then(function(){
+      vm.getUserInfo();
+      console.log("Here is the new", vm.user.favorites);
+    
+  })
+    .catch(function(err){
+      console.log(err);
+    })
+  }
+});
