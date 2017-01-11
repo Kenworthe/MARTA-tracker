@@ -13,6 +13,12 @@ function liveTickerController(railService, busService, userService, $filter, $ti
 	self.busStop = [];
 	self.repeat = true;
 
+	self.selectFavorite = function(station){
+		userService.userSelection = station;
+		console.log('added ', station, 'to userSelection');
+		
+	}
+
 	self.getStationRepeat = function(stationName){
 		console.log(stationName);
 		railService.getAllTrains()
@@ -27,19 +33,21 @@ function liveTickerController(railService, busService, userService, $filter, $ti
 	}
 	self.getStationRepeat(self.selectedStation);
 
-	self.getBusStopRepeat = function(stopName){
-		console.log(stopName);
-		busService.getAllBuses()
-		.then( (response) => {
-			self.busStop = $filter('filter')(response.data, { 'TIMEPOINT': stopName });
-			console.log(self.busStop);
-			if (self.repeat){
-				$timeout(() => { self.getBusStopRepeat(stopName) }, 3000);
-			}
-			else { return }
-		});
-	}
-	self.getBusStopRepeat(self.selectedBusStop);
+	// self.getBusStopRepeat = function(stopName){
+	// 	console.log(stopName);
+	// 	busService.getAllBuses()
+	// 	.then( (response) => {
+	// 		self.busStop = $filter('filter')(response.data, { 'TIMEPOINT': stopName });
+	// 		console.log(self.busStop);
+	// 		if (self.repeat){
+	// 			$timeout(() => { self.getBusStopRepeat(stopName) }, 3000);
+	// 		}
+	// 		else { return }
+	// 	});
+	// }
+	// self.getBusStopRepeat(self.selectedBusStop);
+
+
 
 //timeout function to stop refresh after a set duration.
 	$timeout(function(){
