@@ -10,7 +10,8 @@ function searchBarController(busService, railService, userService, $filter) {
     let self = this;
     self.trains = railService.trains;
     self.buses = busService.buses;
-    self.both = railService.trains.concat(busService.buses);
+    self.both = self.trains.concat(self.buses);
+    
     self.userSelection = userService.userSelection;
     self.setSelection = function(input){
         userService.userSelection = input;

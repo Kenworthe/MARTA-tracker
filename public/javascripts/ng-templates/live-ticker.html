@@ -2,6 +2,12 @@
 	<p>Showing schedule for: {{$ctrl.selectedStation}}</p>
 </div>
 <ul>
-	<li ng-repeat="train in $ctrl.station">{{train.LINE}} line, heading {{train.DIRECTION}} to {{train.DESTINATION}}: {{train.WAITING_TIME}} ({{train.WAITING_SECONDS}} sec)</li>
-	<li ng-repeat="bus in $ctrl.busStop">{{bus.TIMEPOINT}} : {{bus.LATITUDE}}, {{bus.LONGITUDE}}</li>
+	<li ng-repeat="train in $ctrl.station">
+		{{train.LINE}} line, heading {{train.DIRECTION}} 
+		to {{train.DESTINATION}}: {{train.WAITING_TIME}} 
+		({{train.WAITING_SECONDS}} sec) <button>Add to Favorites</button>
+	</li>
+	<li ng-repeat="bus in $ctrl.busStop">
+		{{bus.TIMEPOINT}} : {{bus.LATITUDE}}, {{bus.LONGITUDE}}
+	</li>
 </ul>
