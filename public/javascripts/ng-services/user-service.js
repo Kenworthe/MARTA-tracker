@@ -4,6 +4,18 @@ angular.module('martaApp')
   let self = this;
   self.userSelection = '';
 
+  self.getUser = function(){
+    return $http.get('/user');
+  }
+
+  self.postFavorite = function(station){
+    // return $http.post('/users/:id', { favorites: station });
+    return $http.post('/user', { favorites: station });
+  }
+
+  self.deleteFavorite = function(station){
+    // return $http.put('/users/:id', { favorites: station });
+    return $http.put('/user', { favorites: station });
   // self.getuserSelection = function(){
   //   console.log('getting user selection...', self.userSelection);
   //   return self.userSelection;
@@ -13,18 +25,6 @@ angular.module('martaApp')
   //   console.log('setting user stop to...', newSelection);
   //   return self.userSelection = newSelection;
   // }
-
-  self.getUser = function(){
-    return $http.get('/user');
-  }
-
-  self.postFavorite = function(station){
-    return $http.post('/users/:id', { favorites: station });
-  }
-
-  self.deleteFavorite = function(station){
-    return $http.put('/users/:id', { favorites: station });
-
   }
 })
 
@@ -39,10 +39,15 @@ angular.module('martaApp')
   vm.getUserInfo = function(){
     userService.getUser()
     .then(function(response){
-      vm.user = response.data;
-      console.log(vm.user);
-      console.log(vm.user.favorites);
-      vm.favorites = response.data.favorites;
+      if (response.data.id){
+        vm.user = response.data;
+        vm.favorites = response.data.favorites;
+        console.log(vm.user);
+        console.log(vm.favorites);
+      }
+      else {
+        console.log('response.data did not include user.id.\nPlease log in to continue.');
+      }
     })
     .catch(function(err){
       console.log(err);
@@ -67,7 +72,6 @@ angular.module('martaApp')
     .then(function(){
       vm.getUserInfo();
       console.log("Here is the new", vm.user.favorites);
-    
   })
     .catch(function(err){
       console.log(err);
