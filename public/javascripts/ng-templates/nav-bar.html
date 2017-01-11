@@ -15,7 +15,7 @@
   <p>></p>
   <div ng-repeat="favorite in $ctrl.user.favorites" class="favorite">
     <p>{{favorite}}</p>
-    <!-- <span ng-click="$ctrl.removeThisFavorite(bus)">x</span> -->
+    <span ng-click="$ctrl.removeFavorite(favorite)">x</span>
   </div>
 
 </div>

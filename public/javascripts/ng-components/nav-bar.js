@@ -15,4 +15,27 @@ function navBarController(userService){
   .catch(function(err){
     console.log(err);
   });
+
+  vm.removeFavorite = function(station){
+    userService.deleteFavorite(station)
+    .then(function(){
+      vm.getUserInfo();
+      console.log("Here is the new", vm.user.favorites);
+  })
+    .catch(function(err){
+      console.log(err);
+    })
+  }
+
 }
+
+// this.removeFavorite = function(station){
+//   userService.deleteFavorite(station)
+//   .then(function(){
+//     vm.getUserInfo();
+//     console.log("Here is the new", vm.user.favorites);
+// })
+//   .catch(function(err){
+//     console.log(err);
+//   })
+// }
