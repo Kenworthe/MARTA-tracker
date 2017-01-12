@@ -29,7 +29,7 @@ angular.module('martaApp')
   vm.removeFavorite = function(station){
     userService.deleteFavorite(station)
     .then(function(){
-      userService
+      vm.getUserInfo();
       console.log("Here is the new", vm.user.favorites);
   })
     .catch(function(err){
