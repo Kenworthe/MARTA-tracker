@@ -25,7 +25,9 @@ function liveTickerController(railService, busService, userService, $filter, $ti
 			else { return }
 		});
 	}
-	vm.getStationRepeat(vm.selectedStation);
+	if(vm.selectedStation){
+		vm.getStationRepeat(vm.selectedStation);
+	}
 
 	// vm.getBusStopRepeat = function(stopName){
 	// 	console.log(stopName);

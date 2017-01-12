@@ -17,19 +17,12 @@ function authenticate(req, res, next) {
 	}
 }
 
-/* GET home page. */
+// GET home page.
 router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get('/signup', function(req, res, next) {
-  res.render('signup');
-});
-
-router.get('/login', function(req, res, next) {
-  res.render('login');
-});
-
+//GET marta rail api endpoint, return json
 router.get('/marta-rail', function(req, res, next){
   request(martaRail, function(error, response, body){
     if (error){
@@ -41,6 +34,7 @@ router.get('/marta-rail', function(req, res, next){
   })
 });
 
+//GET marta bus api endpoint, return json
 router.get('/marta-bus', function(req, res, next){
   request(martaBus, function(error, response, body){
     if (error){
@@ -51,6 +45,44 @@ router.get('/marta-bus', function(req, res, next){
     }
   })
 });
+
+// GET signup page.
+router.get('/signup', function(req, res, next) {
+  res.render('signup');
+});
+
+// POST sign up new user
+router.post('/signup', function(req, res, next) {
+  console.log(req.body);
+  var signUpStrategy = passport.authenticate('local-signup', {
+    successRedirect: '/',
+    failureRedirect: '/',
+    successFlash: true,
+    failureFlash: true
+  });
+  return signUpStrategy(req, res, next);
+});
+
+//GET login page.
+router.get('/login', function(req, res, next) {
+  res.render('login');
+});
+
+//POST login -> check passport
+router.post('/login',
+  passport.authenticate('local-login', {
+    session: true,
+    successRedirect: '/#!/results',
+    failureRedirect: '/login',
+  })
+);
+
+//LOGOUT
+router.get('/logout', function(req,res){
+  req.logout();
+  console.log('successfully logged out!');
+  res.redirect('/');
+})
 
 //GET logged in user and send to angular
 router.get('/user', authenticate, function(req, res,next) {
@@ -63,10 +95,8 @@ router.get('/user', authenticate, function(req, res,next) {
   res.send(data);
 });
 
-//add favorite to favorites route
-// router.post('/users/:id', authenticate, function(req, res, next){
+// add favorite to favorites route
 router.post('/user', authenticate, function(req, res, next){
-  console.log('current user is...', currentUser);
   console.log('POSTING... req.body:', req.body);
   User.findOneAndUpdate(
     {_id: currentUser.id},
@@ -82,20 +112,18 @@ router.post('/user', authenticate, function(req, res, next){
     // }
   )
   .then( function(response) {
-    console.log('POST SUCCESSFUL; response is...', response);
+    console.log('POST SUCCESSFUL...', response);
     res.json(response);
   })
   .catch(function(err){
     console.log(err);
-    return next;
+    return next(err);
   })
 });
 
-//remove favorite from favorites array
-// router.put('/users/:id', authenticate, function(req, res, next){
+// remove favorite from favorites array
 router.put('/user', authenticate, function(req, res, next){
-  console.log('current user is...', currentUser);
-  console.log('DELETING... req.body:', req.body);
+  console.log('DELETING favorite...', req.body);
   User.findOneAndUpdate(
     {_id: currentUser.id},
     { $pullAll: {favorites: [req.body.favorites]}}
@@ -118,33 +146,5 @@ router.put('/user', authenticate, function(req, res, next){
     return next;
   })
 });
-
-//LOGOUT
-router.get('/logout', function(req,res){
-  req.logout();
-  console.log('successfully logged out!');
-  res.redirect('/');
-})
-
-/* POST SIGN UP */
-router.post('/signup', function(req, res, next) {
-  console.log(req.body);
-  var signUpStrategy = passport.authenticate('local-signup', {
-    successRedirect: '/',
-    failureRedirect: '/',
-    successFlash: true,
-    failureFlash: true
-  });
-  return signUpStrategy(req, res, next);
-});
-
-//POST login -> check passport
-router.post('/login',
-  passport.authenticate('local-login', {
-    session: true,
-    successRedirect: '/#!/favorites',
-    failureRedirect: '/login',
-  })
-);
 
 module.exports = router;
