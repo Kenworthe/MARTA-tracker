@@ -1,10 +1,12 @@
 <div>
-  <h3>Logged in as username: {{ $ctrl.user }}</h3>
-  <!-- <p>List of favorites: {{ $ctrl.user.favorites }}</p> -->
+  <h3>Logged in as username: {{ $ctrl.user.username }}</h3>
+   <p>List of favorites: {{ $ctrl.user.favorites }}</p> 
 </div>
 
 <div>
-  <!-- <input placeholder="username" ng-model="$ctrl.user.username"/> -->
+
+
+   <!--<input placeholder="username" ng-model="$ctrl.user.username"/> -->
   <!-- <input placeholder="email" ng-model="$ctrl.user.email"/> -->
   <!-- <input type="text" placeholder="add favorites" ng-model="$ctrl.favorites"/> -->
   <!-- <select>
@@ -16,7 +18,7 @@
   <!-- <input/> -->
 
 
-  <!--<div ng-repeat="favorite in $ctrl.user.favorites">
+  <div ng-repeat="favorite in $ctrl.user.favorites">
     <li ng-model="$ctrl.favorites" ng-click="$ctrl.setSelected(bus)">{{favorite}}</li>
     <button ng-click="$ctrl.postUser(favorite)">add</button>
     <button ng-click="$ctrl.removeThisFavorite(favorite)">x</button>
@@ -29,7 +31,5 @@
 
   <div ng-repeat="favorite in $ctrl.user.favorites">
     <li ng-model="$ctrl.selectedFavorite">{{ favorite }}<button ng-click="$ctrl.removeFavorite(favorite)">x</button></li>
-  </div>-->
-
-  <!--<live-ticker ng-repeat="favorite in $ctrl.user.favorites"></live-ticker>-->
+  </div>
 </div>

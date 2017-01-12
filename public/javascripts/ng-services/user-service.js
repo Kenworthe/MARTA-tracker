@@ -20,26 +20,15 @@ angular.module('martaApp')
 .controller('userController', function(userService){
   console.log('userController is alive!');
   let vm = this;
-  vm.user = [];
-  // vm.favorites = [];
-  // vm.selectedFavorite = '';
-
-  // vm.getUserFromService = function(){
-  //   vm.user = userService.user
-  //   console.log('from controller...', vm.user);
-  // }
-  // vm.getUserFromService();
-  //fetch fresh user data upon loading state
-  // vm.getUserFromService();
-
-
-
-  self.getUserInfo = function(){
-    return $http.get('/user')
+  vm.user = null;
+  vm.selectedFavorite = '';
+  
+  vm.getUserInfo = function(){
+    userService.getUser()
     .then(function(response){
       if (response.data.id){
-        self.user = response.data;
-        console.log('from service...', self.user);
+        vm.user = response.data;
+        console.log('from controller...', vm.user);
       }
       else {
         console.log('response.data did not include user.id.\nPlease log in to continue.');
@@ -49,10 +38,7 @@ angular.module('martaApp')
       console.log(err);
     })
   }
-  self.getUserInfo();
-
-
-
+  vm.getUserInfo();
 
   vm.addNewFavorite = function(station){
     userService.postFavorite(station)
@@ -69,7 +55,7 @@ angular.module('martaApp')
     userService.deleteFavorite(station)
     .then(function(){
       vm.getUserInfo();
-      console.log("Here is the new", vm.user.favorites);
+      console.log('successfully deleted favorite. remaining favorites: ', vm.user.favorites);
   })
     .catch(function(err){
       console.log(err);
