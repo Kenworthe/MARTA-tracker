@@ -164,7 +164,7 @@ button {
 .profile {
   color: #99B898;
 
-  width: 95%;
+  width: 85%;
   margin: 0 auto;
   /*border: 1px solid gray;*/
   display: flex;
@@ -198,6 +198,9 @@ button {
 }
 .manage p {
   margin: 3px 0;
+}
+.alignRight {
+  text-align: right;
 }
 
 .fill {

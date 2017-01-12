@@ -8,23 +8,20 @@
   </div>
 </div>
 
-<div class="manage">
+<div class="manage alignRight">
   <h1>Edit Favorites</h1>
-  <!-- <h2 ng-show="$ctrl.user.username">your current favorites:</h2> -->
-  <div ng-repeat="favorite in $ctrl.user.favorites">
+  <div ng-repeat="favorite in $ctrl.user.favorites" class="alignRight">
     <p>{{favorite}}</p>
-    <!-- <p ng-click="$ctrl.removeFavorite(favorite)">x</p> -->
-    <!-- <img ng-click="$ctrl.removeFavorite(favorite)" class="fill" src="../images/thumbdown.svg"/> -->
     <p ng-click="$ctrl.removeFavorite(favorite)" class="remove">-</p>
   </div>
 
   <!-- <label>browse</label> -->
-  <select ng-model="$ctrl.add" ng-init="train = train">
+  <select ng-model="$ctrl.add">
     <option ng-repeat="train in $ctrl.trains" ng-model="$ctrl.train">{{train}}</option>
   </select>
   <!-- <p>save to favorite</p> -->
   <!-- <img ng-click="$ctrl.addNewFavorite($ctrl.train)" src="../images/thumbup.svg"/> -->
-  <p ng-click="$ctrl.addNewFavorite($ctrl.train)" ng-disabled="$ctrl.train === train" class="add">+</p>
+  <p ng-click="$ctrl.addNewFavorite($ctrl.train)" class="add">+</p>
 </div>
 
 </div>
