@@ -20,7 +20,11 @@
   <!-- <p>></p> -->
   <!-- <div class="favorite"> -->
   <!-- <img src="../images/thumbup.svg"/> -->
-    <p ng-repeat="favorite in $ctrl.user.favorites">{{favorite}}</p>
+    <p ng-repeat="favorite in $ctrl.user.favorites">
+      <a ng-click="$ctrl.setSelection(favorite)" ui-sref="results" ui-sref-opts="{reload:true}">
+        {{ favorite }}
+      </a>
+    </p>
     <!-- <p ng-click="$ctrl.removeFavorite(favorite)">x</p> -->
 
 </div>
