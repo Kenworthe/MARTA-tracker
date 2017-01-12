@@ -8,7 +8,7 @@ angular.module('martaApp')
 function searchBarController(busService, railService, userService, $filter) {
     console.log('searchBarController is alive!');
     let self = this;
-    self.bothFilter =  '';
+    self.bothFilter =  null;
     self.trains = railService.trains;
     // self.buses = busService.buses;
     // self.both = self.trains.concat(self.buses);
@@ -20,5 +20,6 @@ function searchBarController(busService, railService, userService, $filter) {
     self.userSelection = userService.userSelection;
     self.setSelection = function(input){
         userService.userSelection = input;
+        self.userSelection = input;
     };
 }
