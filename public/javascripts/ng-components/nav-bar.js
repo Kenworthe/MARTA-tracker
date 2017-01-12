@@ -7,6 +7,11 @@ angular.module('martaApp')
 function navBarController(userService){
   var vm = this;
   vm.user = {};
+  vm.userSelection = userService.userSelection;
+  
+  vm.setSelection = function(input){
+      userService.userSelection = input;
+  };
 
   vm.getUserInfo = function(){
     userService.getUser()
