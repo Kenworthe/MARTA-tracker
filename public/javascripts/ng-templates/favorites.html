@@ -5,24 +5,8 @@
 
 <div>
 
-
-   <!--<input placeholder="username" ng-model="$ctrl.user.username"/> -->
-  <!-- <input placeholder="email" ng-model="$ctrl.user.email"/> -->
-  <!-- <input type="text" placeholder="add favorites" ng-model="$ctrl.favorites"/> -->
-  <!-- <select>
-    <option ng-repeat="favorite in $ctrl.user.favorites">{{favorite}}</option>
-  </select> -->
-  <!-- <input type="text" placeholder="remove favorites" ng-model="$ctrl.removeFavorite"/>
-  <button ng-click="$ctrl.removeThisFavorite()">removeFavorite</button>
-  <button ng-click="$ctrl.postUser()">post user</button> -->
-  <!-- <input/> -->
-
-
-  <div ng-repeat="favorite in $ctrl.user.favorites">
-    <li ng-model="$ctrl.favorites" ng-click="$ctrl.setSelected(bus)">{{favorite}}</li>
-    <button ng-click="$ctrl.postUser(favorite)">add</button>
-    <button ng-click="$ctrl.removeThisFavorite(favorite)">x</button>
-  <p>{{ $ctrl.user.favorites }}</p>
+<div ng-repeat="favorite in $ctrl.user.favorites">
+  <p>{{favorite}}</p>
 </div>
 
 <div>

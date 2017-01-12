@@ -22,7 +22,8 @@ angular.module('martaApp')
   let vm = this;
   vm.user = null;
   vm.selectedFavorite = '';
-  
+
+  //need to find a way to move this to above service.
   vm.getUserInfo = function(){
     userService.getUser()
     .then(function(response){
@@ -38,6 +39,7 @@ angular.module('martaApp')
       console.log(err);
     })
   }
+  //fetch user info upon page load.
   vm.getUserInfo();
 
   vm.addNewFavorite = function(station){
