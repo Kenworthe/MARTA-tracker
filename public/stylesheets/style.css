@@ -151,7 +151,10 @@ button {
   display: inline-block;
   align-self: center;
   padding: 0 5px;
-  border-right: 1px solid white;
+  margin-right: 5px;
+  /*border-right: 1px solid white;*/
+  background: #FECEA8;
+  border-radius: 10px;
 }
 .favorites p:last-child {
   border-right: none;

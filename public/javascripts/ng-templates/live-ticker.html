@@ -1,8 +1,8 @@
 <div class="showingFor" ng-show="$ctrl.selectedStation">
 	<!-- <p>Showing schedule for: {{$ctrl.selectedStation}}</p> -->
-	<button ng-click="$ctrl.addNewFavorite($ctrl.selectedStation)" ng-show="$ctrl.user">Add {{$ctrl.selectedStation}} to Favorites</button>
+	<button ng-click="$ctrl.addNewFavorite($ctrl.selectedStation)" ng-show="$ctrl.user.username">Add {{$ctrl.selectedStation}} to Favorites</button>
 	<!-- <button ng-hide="$ctrl.user">Sign up to add to Favorites</button> -->
-	<p ng-hide="$ctrl.user">Sign up to add to Favorites</p>
+	<!-- <p ng-hide="$ctrl.user">Sign up to add to Favorites</p> -->
 </div>
 
 <div class="ticker" ng-show="$ctrl.selectedStation">
