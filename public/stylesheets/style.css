@@ -222,7 +222,7 @@ button {
 
 .search {
   /*top:50px;*/
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
   /*border-radius: 20px;*/
   background: white;
@@ -283,7 +283,6 @@ input[type=password]{
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: scroll;
   vertical-align: text-bottom;
   font-family: 'Raleway Dots', sans-serif;
   font-size: 3em;

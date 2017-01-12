@@ -19,12 +19,12 @@
   </div>
 
   <!-- <label>browse</label> -->
-  <select ng-model="$ctrl.add" >
+  <select ng-model="$ctrl.add" ng-init="train = train">
     <option ng-repeat="train in $ctrl.trains" ng-model="$ctrl.train">{{train}}</option>
   </select>
   <!-- <p>save to favorite</p> -->
   <!-- <img ng-click="$ctrl.addNewFavorite($ctrl.train)" src="../images/thumbup.svg"/> -->
-  <p ng-click="$ctrl.addNewFavorite($ctrl.train)" class="add">+</p>
+  <p ng-click="$ctrl.addNewFavorite($ctrl.train)" ng-disabled="$ctrl.train === train" class="add">+</p>
 </div>
 
 </div>
