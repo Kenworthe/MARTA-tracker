@@ -1,8 +1,8 @@
 <div class="profile">
 
 <div class="info">
-  <h1>Account Details</h1><br>
   <div class="details">
+    <h1>Account</h1><br>
     <p>username:      {{ $ctrl.user.username }} </p><br>
     <p>email:     {{ $ctrl.user.email }} </p>
   </div>
@@ -12,9 +12,10 @@
   <h1>Edit Favorites</h1>
   <!-- <h2 ng-show="$ctrl.user.username">your current favorites:</h2> -->
   <div ng-repeat="favorite in $ctrl.user.favorites">
-    <h4>{{favorite}}</h4>
+    <p>{{favorite}}</p>
     <!-- <p ng-click="$ctrl.removeFavorite(favorite)">x</p> -->
-    <img ng-click="$ctrl.removeFavorite(favorite)" class="fill" src="../images/thumbdown.svg"/>
+    <!-- <img ng-click="$ctrl.removeFavorite(favorite)" class="fill" src="../images/thumbdown.svg"/> -->
+    <p ng-click="$ctrl.removeFavorite(favorite)" class="remove">-</p>
   </div>
 
   <!-- <label>browse</label> -->
@@ -22,9 +23,10 @@
     <option ng-repeat="train in $ctrl.trains" ng-model="$ctrl.train">{{train}}</option>
   </select>
   <!-- <p>save to favorite</p> -->
-  <img ng-click="$ctrl.addNewFavorite($ctrl.train)" src="../images/thumbup.svg"/>
+  <!-- <img ng-click="$ctrl.addNewFavorite($ctrl.train)" src="../images/thumbup.svg"/> -->
+  <p ng-click="$ctrl.addNewFavorite($ctrl.train)" class="add">+</p>
 </div>
 
 </div>
 
-<!-- <p>{{$ctrl.user}}</p> -->
+<!-- <div class="tracks"></div> -->

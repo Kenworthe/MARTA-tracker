@@ -4,12 +4,12 @@
 
 <div class="ticker">
 		<ul>
-			<li ng-repeat="train in $ctrl.station" ng-class="{'red': train.LINE == 'RED', 'green': train.LINE == 'GREEN', 'gold': train.LINE == 'GOLD', 'blue': train.LINE == 'BLUE'}">
-				{{train.LINE}} line, heading {{train.DIRECTION}}
+			<p ng-repeat="train in $ctrl.station" ng-class="{'red': train.LINE == 'RED', 'green': train.LINE == 'GREEN', 'gold': train.LINE == 'GOLD', 'blue': train.LINE == 'BLUE'}">
+				{{train.LINE}}  {{train.DIRECTION}}
 				to {{train.DESTINATION}}: {{train.WAITING_TIME}}
-				({{train.WAITING_SECONDS}} sec)
+				{{train.WAITING_SECONDS % 60}} sec
 				<!-- <button>Add to Favorites</button> -->
-			</li>
+			</p><br>
 			<!-- <li ng-repeat="bus in $ctrl.busStop">
 				{{bus.TIMEPOINT}} : {{bus.LATITUDE}}, {{bus.LONGITUDE}}
 			</li> -->
