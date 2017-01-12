@@ -4,6 +4,7 @@ body {
   /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
   font-family: 'PT Sans Caption', sans-serif;
   font-size: 14px;
+  background-color: #2A363B;
 }
 
 a {
@@ -11,7 +12,7 @@ a {
   text-decoration: none;
 }
 .navBar {
-  background-color: rgba(230,230,230,1);
+  background-color: #FECEA8;
   padding: 10px;
   width: 100%;
   height: 70px;
@@ -19,8 +20,34 @@ a {
   display: flex;
   align-items: center;
 }
+.navBar h1 {
+  font-family: 'Raleway Dots';
+  font-size: 50px;
+}
 .navBar img {
+  /*align-self: flex-start;*/
+  /*opacity: .5;*/
+}
+#searchGlass {
+  opacity: .3;
+  align-self: center;
+}
+.logo {
+  width: 70px;
+  height: 70px;
+  /*background: white;*/
+  background-image: url("../images/marta-logo.jpg");
   align-self: flex-start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo h1{
+  color: white;
+  font-size: 70px;
+  align-self: center;
+  text-align: center;
+
 }
 
 .links {
@@ -70,8 +97,9 @@ a {
 }
 
 .favorites {
-  background-color: #00BBE5;
-  color: black;
+  /*background-color: #00BBE5;*/
+  background-color: #FF847C;
+  color: #2A363B;
   margin: 0;
   padding-right: 10px;
   width: 100%;
@@ -90,28 +118,76 @@ a {
   display: inline-block;
   align-self: center;
   padding: 5px;
-  /*border-right: 1px solid white;*/
+  border-right: 1px solid white;
 }
-.favorites:last-child.p{
+.favorites p:last-child {
   border-right: none;
+  flex-shrink: 1;
 }
 
 .profile {
+  color: #99B898;
+
   width: 400px;
   margin: 0 auto;
   /*border: 1px solid gray;*/
+  display: flex;
+  text-align: center;
+  /*align-items: baseline;*/
+  flex-direction: row;
+  /*justify-content: center;*/*/
 }
-.profile p {
+.profile h4, p {
   display: inline-block;
 }
+.profile h4 {
+  font-size: 20px;
+  margin: 0;
+}
+.manage {
+  width: 500px;
+}
+.fill {
+  fill: white;
+}
+
+.details {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  /*border: 1px solid gray;*/
+}
+
+.info {
+  /*border: 1px solid gray;*/
+}
+
 .search {
   /*top:50px;*/
+  width: 60%;
+  margin: 0 auto;
+  background: white;
+  /*background: black;*/
+  border: 1px solid gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search img{
+  align-self: center;
+  /*margin: 0  0 0 10%;*/
+}
+.searchInput {
+  margin: 0 auto;
 }
 input[type=text]{
-  width: 100%;
+  width: 200px;;
   text-align: center;
   height: 40px;
   font-size: 20px;
+  outline: none;
+  border: none;
+
 }
 .fixed {
   position: static;
@@ -120,19 +196,50 @@ input[type=text]{
   /*margin: 0 auto;*/
   /*top: 70px;*/
 }
-.results {
-  border: 1px solid gray
-  width: 400px;
+.ticker {
+  border: 3px solid gray;
+  border-radius: 20px;
+  background-color: #2A363B;
+  width: 60%;
+  height: 400px;
+  /*border-top: 5px solid #FF847C;*/
+  margin: 0 auto;
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  overflow: scroll;
+  font-family: 'Raleway Dots', sans-serif;;
+}
+.ticker li{
+  list-style: none;
+}
+.showingFor {
+  color: white;
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  /*background-color: #FF847C;*/
 }
 .red {
-  color: red;
+  color: #E84A5F;
 }
 .green {
-  color: green;
+  color: #99B898;
 }
 .blue {
-  color: blue;
+  color: #00BBE5;
 }
 .gold {
-  color: gold;
+  color: #FECEA8;
+}
+@media only screen and (max-width: 500px) {
+    .search {
+        width: 100%;
+    }
+    .navBar h1 {
+      font-size: 30px;
+    }
+    .ticker {
+      width: 98%;
+    }
 }

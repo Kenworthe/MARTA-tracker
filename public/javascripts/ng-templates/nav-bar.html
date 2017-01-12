@@ -1,6 +1,10 @@
 <div class="navBar">
   <!-- <a href=''><h2>[]</h2></a> -->
-  <a ui-sref="home"><img src="./images/marta-logo.jpg"/></a>
+  <a ui-sref="home">
+    <div class="logo">
+      <h1>M</h1>
+    </div>
+  </a>
 
   <h1 class="center" id="marta">MARTA scheduler</h1>
   <div class="links">
@@ -13,9 +17,9 @@
 
 <div class="favorites fixed">
   <!-- <p>></p> -->
-  <div ng-repeat="favorite in $ctrl.user.favorites" class="favorite">
-    <p>{{favorite}}</p>
-    <p ng-click="$ctrl.removeFavorite(favorite)">x</p>
-  </div>
+  <!-- <div class="favorite"> -->
+  <!-- <img src="../images/thumbup.svg"/> -->
+    <p ng-repeat="favorite in $ctrl.user.favorites">{{favorite}}</p>
+    <!-- <p ng-click="$ctrl.removeFavorite(favorite)">x</p> -->
 
 </div>
