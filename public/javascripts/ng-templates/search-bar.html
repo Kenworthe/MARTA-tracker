@@ -5,7 +5,7 @@
 
   <span ng-hide="myForm.myField.$error.required">
     <ul ng-repeat="item in $ctrl.trains | filter:bothFilter">
-      <li ng-click="$ctrl.setSelection(item)"><a ui-sref="results">{{ item }}</a></li>
+      <li ng-click="$ctrl.setSelection(item)"><a ui-sref-opts="{reload:true}" ui-sref="results">{{ item }}</a></li>
     <ul>
   </span>
 </form>
