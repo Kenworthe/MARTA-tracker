@@ -13,7 +13,7 @@ function navBarController(userService){
     .then(function(response){
       if (response.data.id){
         vm.user = response.data;
-        console.log(vm.user);
+        // console.log(vm.user);
       }
       else {
         console.log('response.data did not include user.id.\nPlease log in to continue.');

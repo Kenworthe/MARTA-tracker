@@ -6,57 +6,61 @@ angular.module('martaApp')
 })
 function liveTickerController(railService, busService, userService, $filter, $timeout){
 	console.log('liveTickerController is alive!');
-	let self = this;
-	self.selectedStation = userService.userSelection;
-	self.selectedBusStop = userService.userSelection;
-	self.station = [];
-	self.busStop = [];
-	self.repeat = true;
+	let vm = this;
+	vm.selectedStation = userService.userSelection;
+	vm.station = [];
+	// vm.selectedBusStop = userService.userSelection;
+	// vm.busStop = [];
+	vm.repeat = true;
 
-	self.selectFavorite = function(station){
-		userService.userSelection = station;
-		console.log('added ', station, 'to userSelection');
-		
-	}
-
-	self.getStationRepeat = function(stationName){
+	vm.getStationRepeat = function(stationName){
 		console.log(stationName);
 		railService.getAllTrains()
 		.then( (response) => {
-			self.station = $filter('filter')(response.data, { 'STATION': stationName });
-			console.log(self.station);
-			if (self.repeat){
-				$timeout(() => { self.getStationRepeat(stationName) }, 3000);
+			vm.station = $filter('filter')(response.data, { 'STATION': stationName });
+			console.log(vm.station);
+			if (vm.repeat){
+				$timeout(() => { vm.getStationRepeat(stationName) }, 3000);
 			}
 			else { return }
 		});
 	}
-	self.getStationRepeat(self.selectedStation);
+	vm.getStationRepeat(vm.selectedStation);
 
-	// self.getBusStopRepeat = function(stopName){
+	// vm.getBusStopRepeat = function(stopName){
 	// 	console.log(stopName);
 	// 	busService.getAllBuses()
 	// 	.then( (response) => {
-	// 		self.busStop = $filter('filter')(response.data, { 'TIMEPOINT': stopName });
-	// 		console.log(self.busStop);
-	// 		if (self.repeat){
-	// 			$timeout(() => { self.getBusStopRepeat(stopName) }, 3000);
+	// 		vm.busStop = $filter('filter')(response.data, { 'TIMEPOINT': stopName });
+	// 		console.log(vm.busStop);
+	// 		if (vm.repeat){
+	// 			$timeout(() => { vm.getBusStopRepeat(stopName) }, 3000);
 	// 		}
 	// 		else { return }
 	// 	});
 	// }
-	// self.getBusStopRepeat(self.selectedBusStop);
+	// vm.getBusStopRepeat(vm.selectedBusStop);
+
+  vm.addNewFavorite = function(station){
+    userService.postFavorite(station)
+    .then(function(){
+      console.log('post successfull!')
+    })
+    .catch(function(err){
+      console.log(err);
+    })
+  }
 
 
 
 //timeout function to stop refresh after a set duration.
 	$timeout(function(){
-		self.repeat = false;
+		vm.repeat = false;
 		console.log('Repeat set to false!');
 	}, (2*60*1000));
 
 //stop timeout if user changes URL
 	// $rootScope.$on('$locationChangeStart', function(){
-	// 	self.repeat = false;
+	// 	vm.repeat = false;
 	// })
 }
