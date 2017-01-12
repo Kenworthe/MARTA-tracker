@@ -3,6 +3,14 @@ angular.module('martaApp')
 .service('userService', function($http){
   let self = this;
   self.userSelection = '';
+  self.user = {};
+
+  self.updateUser = function(){
+    $http.get('/user')
+    .then( (res) => {
+      self.user = res.data;
+    });
+  }
 
   self.getUser = function(){
     return $http.get('/user');
