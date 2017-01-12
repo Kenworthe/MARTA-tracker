@@ -344,8 +344,8 @@ select {
       display: none;
     }
     .logo {
-      width: 50px;
-      height: 50px;
+      width: 80px;
+      height: 45px;
       /*transform: scale(.3);*/
       background-image: url("../images/marta-logo-dark-small.png");
       background-position: center;
@@ -355,6 +355,7 @@ select {
     }
     .logo h1 {
       display: block;
+      font-size: 55px;
     }
     .navBar {
       height: 40px;
