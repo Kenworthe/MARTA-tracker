@@ -5,7 +5,7 @@ var request = require('request');
 var secret = require('../secret.js');
 var User = require('../models/user');
 
-var martaRail = 'http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=' + secret.kennysMartaApi;
+var martaRail = 'http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=' + secret.API_KEY;
 var martaBus = 'http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus';
 
 function authenticate(req, res, next) {
