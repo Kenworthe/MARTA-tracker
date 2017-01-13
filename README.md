@@ -76,7 +76,7 @@ MARTA-Tracker is a mobile-first, SPA built with Angular 1.5 and Node.js. This ap
               
               // then add: 
               var secret = {
-                API_KEY : //add your Marta Realtime Rails API key here.
+                API_KEY : //add your Marta Realtime Rails API key here OR contact me and I can send you mine
               }
               
               module.exports = secret
