@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var request = require('request');
+var secret = require('../secret.js');
 var User = require('../models/user');
 
-var martaRail = 'http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=e894d4a6-72ca-4268-94ec-af98560a3cc8';
+var martaRail = 'http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=' + secret.kennysMartaApi;
 var martaBus = 'http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus';
 
 function authenticate(req, res, next) {
