@@ -67,3 +67,17 @@ MARTA-Tracker is a mobile-first, SPA built with Angular 1.5 and Node.js. This ap
    * Resolved this error by building a "proxy" route in our Express server, which does the calling to MARTA rails server-side, then passes the data to Angular when Angular calls our "proxy" route.
 * Also ran into a wall when we were trying to get User data from Express to Angular.
    * Resolved this by creating a "user route" which is essentially a custom API endpoint which authenticates and sends user info as a res.json.
+
+* **IMPORTANT** If you want to fork and test this repo, you will need to add the following files in order to access MARTA Rails API:
+
+              // in project directory:
+              touch secret.js
+              open secret.js
+              
+              // then add: 
+              var secret = {
+                API_KEY : //add your Marta Realtime Rails API key here.
+              }
+              
+              module.exports = secret
+              
