@@ -5,8 +5,15 @@ var request = require('request');
 var secret = require('../secret.js');
 var User = require('../models/user');
 
-var martaRail = 'http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=' + secret.API_KEY;
+var martaRail = 'http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=';
 var martaBus = 'http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus';
+
+if (process.env.API_KEY) {
+  martaRail = 'http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=' + process.env.API_KEY;
+}
+else {
+  martaRail = 'http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=' + secret.API_KEY;
+}
 
 function authenticate(req, res, next) {
 	if(!req.isAuthenticated()) {
