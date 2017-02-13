@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var request = require('request');
-var secret = require('../secret.js');
+// var secret = require('../secret.js');
 var User = require('../models/user');
 
 var martaRail = 'http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=';
