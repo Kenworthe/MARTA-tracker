@@ -20,7 +20,7 @@ function liveTickerController(railService, busService, userService, $filter, $ti
 			vm.station = $filter('filter')(response.data, { 'STATION': stationName });
 			console.log(vm.station);
 			if (vm.repeat){
-				$timeout(() => { vm.getStationRepeat(stationName) }, 3000);
+				$timeout(() => { vm.getStationRepeat(stationName) }, 2000);
 			}
 			else { return }
 		});

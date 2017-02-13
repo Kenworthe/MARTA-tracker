@@ -1,11 +1,25 @@
+<!--<select ng-model="$ctrl.userSelection" ng-change="$ctrl.setSelection($ctrl.userSelection); $ctrl.goToResults()">
+  <option ng-repeat="train in $ctrl.trains" ui-sref-opts="{reload:true}" ui-sref="results">{{ train }}</option>
+</select>-->
+
 <div class="search">
   <img id="searchGlass" src="./images/search.svg"/>
-<form name= "myForm" class="searchInput"   autocomplete="off">
-  <input auto-complete name="myField" type="text" placeholder="search trains" autofocus="autofocus" ng-model="$ctrl.bothFilter" required>
+
+<form name= "myForm" class="searchInput" autocomplete="off">
+
+  <input auto-complete
+         name="myField"
+         type="text" 
+         placeholder="search trains" 
+         autofocus="autofocus" 
+         ng-model="$ctrl.bothFilter"
+         required>
 
   <span ng-hide="myForm.myField.$error.required">
-    <ul ng-repeat="item in $ctrl.trains | filter:$ctrl.bothFilter" ng-show="{{$ctrl.userSelection !== $ctrl.bothFilter}}" ng-hide="{{$ctrl.userSelection === $ctrl.bothFilter}}">
-      <li ng-click="$ctrl.setSelection(item); $ctrl.setBothFilter(item)"  ng-hide="$ctrl.userSelection"><a ui-sref-opts="{reload:true}" ui-sref="results">{{ item }}</a></li>
+    <ul ng-repeat="item in $ctrl.trains | filter:$ctrl.bothFilter"
+        ng-show="$ctrl.userSelection !== $ctrl.bothFilter"
+        ng-hide="$ctrl.userSelection === $ctrl.bothFilter">
+      <li ng-click="$ctrl.setSelection(item); $ctrl.setBothFilter(item)" ><a ui-sref-opts="{reload:true}" ui-sref="results">{{ item }}</a></li>
     <ul>
   </span>
 </form>

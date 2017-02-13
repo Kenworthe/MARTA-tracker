@@ -5,9 +5,10 @@ angular.module('martaApp')
         controllerAs: '$ctrl'
     })
 
-function searchBarController(busService, railService, userService, $filter) {
+function searchBarController(busService, railService, userService, $filter, $state) {
     console.log('searchBarController is alive!');
     let self = this;
+    self.userSelection = userService.userSelection;
     self.bothFilter =  null;
     self.trains = railService.trains;
     // self.buses = busService.buses;
@@ -17,9 +18,15 @@ function searchBarController(busService, railService, userService, $filter) {
       self.bothFilter = input;
     }
 
-    self.userSelection = userService.userSelection;
     self.setSelection = function(input){
+        console.log('user selection set to: ' + input);
+        console.log(self.userSelection);
         userService.userSelection = input;
-        self.userSelection = input;
+        console.log(userService.userSelection);
+        // self.userSelection = input;
     };
+
+    self.goToResults = function(){
+        $state.go('results');
+    }
 }
